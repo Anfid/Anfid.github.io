@@ -23,11 +23,29 @@ bar style attributes =
 
 heading : Style -> Int -> List (Element.Attribute msg) -> List (Element.Attribute msg)
 heading style level attributes =
-    [ Font.color <| fgColor style
-    , Font.size (20 + 12 // level)
+    let
+        ( color, size, padding ) =
+            case level of
+                1 ->
+                    ( fgColor style, 32, 15 )
+
+                2 ->
+                    ( fgColor style, 28, 20 )
+
+                3 ->
+                    ( fgFadedColor style, 22, 20 )
+
+                4 ->
+                    ( fgFadedColor style, 20, 20 )
+
+                _ ->
+                    ( fgFadedColor style, 18, 20 )
+    in
+    [ Font.color color
+    , Font.size size
     , Font.family [ Font.serif ]
-    , Element.paddingEach { left = 15, right = 0, top = 0, bottom = 0 }
-    , Region.heading level
+    , Element.paddingEach { left = padding, right = 0, top = 0, bottom = 0 }
+    , Region.heading <| Basics.clamp 1 5 level
     ]
         ++ attributes
 
@@ -42,8 +60,8 @@ paragraph style attributes =
         ++ attributes
 
 
-link : Style -> List (Element.Attribute msg)
-link style =
+link : Style -> List (Element.Attribute msg) -> List (Element.Attribute msg)
+link style attributes =
     [ Font.color <| linkColor style
     , Font.size 18
     , Font.family [ Font.serif ]
@@ -52,6 +70,7 @@ link style =
     , Element.mouseOver [ Font.color <| linkFocusColor style ]
     , Element.focused [ Font.color <| linkFocusColor style ]
     ]
+        ++ attributes
 
 
 button : Style -> List (Element.Attribute msg) -> List (Element.Attribute msg)

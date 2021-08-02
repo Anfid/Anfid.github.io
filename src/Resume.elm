@@ -44,18 +44,20 @@ body =
             , bodyPart "Employment history" <|
                 column [ Element.width fill, Element.spacing 10 ]
                     [ historyEntry
-                        "Senior Rust blockchain developer at XDSoft"
+                        "Blockchain developer (Rust) at XDSoft"
                         "September 2019 - March 2021"
                         "Novosibirsk, Russia"
                       <|
                         Element.column
                             [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
                             [ paragraph (textStyle [])
-                                [ text "Developing and maintaining Exonum fork with private transactions and GOST cryptography" ]
+                                [ text "Developing and maintaining Exonum blockchain framework fork with private transactions and GOST cryptography" ]
                             , paragraph (textStyle [])
-                                [ text "Analyzing business requirements and writing logic" ]
+                                [ text "Analyzing business requirements and implementing logic" ]
                             , paragraph (textStyle [])
                                 [ text "Creating automation scripts and setting up GitLab CI" ]
+                            , paragraph (textStyle [])
+                                [ text "Creating tasks, distributing them to team members, reviewing code and maintaining documentation" ]
                             ]
                     , historyEntry
                         "Embedded developer (C/C++) at MERA"
@@ -65,7 +67,9 @@ body =
                         column
                             [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
                             [ paragraph (textStyle [])
-                                [ text "Developing and maintaining security systems" ]
+                                [ text "Developing and maintaining Linux-based and embedded security systems" ]
+                            , paragraph (textStyle [])
+                                [ text "Improving device network connection stability" ]
                             ]
                     ]
             , bodyPart "Education" <|
@@ -98,17 +102,24 @@ body =
                 paragraph
                     (extrasTextStyle [ Element.spacing 5 ])
                     [ text "22.07.1997, Russia" ]
-            , extraEntry "Links" <|
-                column
+            , extraEntry "Website" <|
+                Element.link
                     (extrasTextStyle [ Element.spacing 5 ])
-                    [ text "github.com/Anfid"
-                    ]
+                    { url = "https://Anfid.github.io/"
+                    , label = el (extrasTextStyle [ Element.alignRight ]) <| text "Anfid.github.io"
+                    }
+            , extraEntry "Links" <|
+                Element.link
+                    (extrasTextStyle [ Element.spacing 5 ])
+                    { url = "https://github.com/Anfid"
+                    , label = el (extrasTextStyle [ Element.alignRight ]) <| text "github.com/Anfid"
+                    }
             , extraEntry "Programming languages" <|
                 column
                     (extrasTextStyle [ Element.spacing 5 ])
                     [ el [] <| text "Rust"
-                    , el [] <| text "Lua"
                     , el [] <| text "Elm"
+                    , el [] <| text "Lua"
                     , el [] <| text "C"
                     ]
             , extraEntry "Skills" <|
@@ -117,6 +128,7 @@ body =
                     [ el [] <| text "Linux"
                     , el [] <| text "Git"
                     , el [] <| text "WASM"
+                    , el [] <| text "x86_64 ASM"
                     ]
             , extraEntry "Languages" <|
                 column
