@@ -44,6 +44,20 @@ body =
             , bodyPart "Employment history" <|
                 column [ Element.width fill, Element.spacing 10 ]
                     [ historyEntry
+                        "Blockchain developer (Rust) at Gear"
+                        "August 2021 - Present"
+                        "Moscow, Russia"
+                      <|
+                        Element.column
+                            [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
+                            [ paragraph (textStyle [])
+                                [ text "Developing and maintaining Gear, a Substrate-based smart contract platform for Polkadot" ]
+                            , paragraph (textStyle [])
+                                [ text "Designing and implementing smart contract library API" ]
+                            , paragraph (textStyle [])
+                                [ text "Extending standalone test library API" ]
+                            ]
+                    , historyEntry
                         "Blockchain developer (Rust) at XDSoft"
                         "September 2019 - March 2021"
                         "Novosibirsk, Russia"

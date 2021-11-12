@@ -13442,6 +13442,42 @@ var $author$project$Resume$body = A2(
 							[
 								A4(
 								$author$project$Resume$historyEntry,
+								'Blockchain developer (Rust) at Gear',
+								'August 2021 - Present',
+								'Moscow, Russia',
+								A2(
+									$mdgriffith$elm_ui$Element$column,
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$paddingEach(
+											{b2: 0, cA: 20, cN: 0, di: 0})
+										]),
+									_List_fromArray(
+										[
+											A2(
+											$mdgriffith$elm_ui$Element$paragraph,
+											$author$project$Resume$textStyle(_List_Nil),
+											_List_fromArray(
+												[
+													$mdgriffith$elm_ui$Element$text('Developing and maintaining Gear, a Substrate-based smart contract platform for Polkadot')
+												])),
+											A2(
+											$mdgriffith$elm_ui$Element$paragraph,
+											$author$project$Resume$textStyle(_List_Nil),
+											_List_fromArray(
+												[
+													$mdgriffith$elm_ui$Element$text('Designing and implementing smart contract library API')
+												])),
+											A2(
+											$mdgriffith$elm_ui$Element$paragraph,
+											$author$project$Resume$textStyle(_List_Nil),
+											_List_fromArray(
+												[
+													$mdgriffith$elm_ui$Element$text('Extending standalone test library API')
+												]))
+										]))),
+								A4(
+								$author$project$Resume$historyEntry,
 								'Blockchain developer (Rust) at XDSoft',
 								'September 2019 - March 2021',
 								'Novosibirsk, Russia',
