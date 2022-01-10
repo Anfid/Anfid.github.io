@@ -55,7 +55,7 @@ paragraph style attributes =
     [ Font.color <| fgColor style
     , Font.size 18
     , Font.family [ Font.serif ]
-    , Font.justify
+    , Font.alignLeft
     ]
         ++ attributes
 

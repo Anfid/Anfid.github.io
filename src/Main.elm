@@ -255,17 +255,19 @@ projects model =
                         ]
                     ]
                 ]
-            , chapter "jwm"
+            , chapter "coppe-wm"
                 model.style
                 2
                 [ Element.textColumn [ Element.spacing 15, Element.width fill ]
                     [ Element.image
                         [ Element.width <| px 300, Element.alignRight, Element.padding 15 ]
-                        { src = "/assets/projects/jwm_demo.jpg", description = "jwm screenshot" }
-                    , Element.link (Styles.link model.style [ Element.paddingXY 20 0, Font.size 20 ]) { label = text "Source", url = "https://github.com/Anfid/jwm" }
-                    , techStack model.style [ "Rust", "Linux", "X11", "libxcb" ]
+                        { src = "/assets/projects/coppe_demo.jpg", description = "coppe screenshot" }
+                    , Element.link (Styles.link model.style [ Element.paddingXY 20 0, Font.size 20 ]) { label = text "Source", url = "https://github.com/Anfid/coppe-wm" }
+                    , techStack model.style [ "Rust", "Linux", "WASM", "X11", "libxcb" ]
                     , Element.paragraph (Styles.paragraph model.style [])
-                        [ text "Minimal Rust window manager for X11."
+                        [ text "Window manager for X11 fully configurable with standalone WASM plugins. It is "
+                        , text "intended to be as feature-rich as possible, but only the most basic functionality "
+                        , text "is implemented at the moment."
                         ]
                     ]
                 ]
@@ -328,7 +330,7 @@ techStack style stack =
 
 chapter : String -> Style -> Int -> List (Element Msg) -> Element Msg
 chapter heading style level content =
-    Element.column [ Element.width fill, Element.height fill, Element.spacing 20 ] <|
+    Element.column [ Element.width fill, Element.height fill, Element.spacing 30, Element.padding 10 ] <|
         [ Element.paragraph (Styles.heading style level []) <|
             [ text heading ]
         ]

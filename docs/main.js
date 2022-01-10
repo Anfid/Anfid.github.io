@@ -12386,7 +12386,8 @@ var $author$project$Main$chapter = F4(
 				[
 					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
-					$mdgriffith$elm_ui$Element$spacing(20)
+					$mdgriffith$elm_ui$Element$spacing(30),
+					$mdgriffith$elm_ui$Element$padding(10)
 				]),
 			_Utils_ap(
 				_List_fromArray(
@@ -12510,7 +12511,7 @@ var $mdgriffith$elm_ui$Element$paddingXY = F2(
 		}
 	});
 var $mdgriffith$elm_ui$Internal$Flag$fontAlignment = $mdgriffith$elm_ui$Internal$Flag$flag(12);
-var $mdgriffith$elm_ui$Element$Font$justify = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.c7);
+var $mdgriffith$elm_ui$Element$Font$alignLeft = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.c8);
 var $author$project$Styles$paragraph = F2(
 	function (style, attributes) {
 		return _Utils_ap(
@@ -12522,7 +12523,7 @@ var $author$project$Styles$paragraph = F2(
 					$mdgriffith$elm_ui$Element$Font$family(
 					_List_fromArray(
 						[$mdgriffith$elm_ui$Element$Font$serif])),
-					$mdgriffith$elm_ui$Element$Font$justify
+					$mdgriffith$elm_ui$Element$Font$alignLeft
 				]),
 			attributes);
 	});
@@ -12808,7 +12809,7 @@ var $author$project$Main$projects = function (model) {
 							])),
 						A4(
 						$author$project$Main$chapter,
-						'jwm',
+						'coppe-wm',
 						model.a,
 						2,
 						_List_fromArray(
@@ -12831,7 +12832,7 @@ var $author$project$Main$projects = function (model) {
 												$mdgriffith$elm_ui$Element$alignRight,
 												$mdgriffith$elm_ui$Element$padding(15)
 											]),
-										{aD: 'jwm screenshot', aP: '/assets/projects/jwm_demo.jpg'}),
+										{aD: 'coppe screenshot', aP: '/assets/projects/coppe_demo.jpg'}),
 										A2(
 										$mdgriffith$elm_ui$Element$link,
 										A2(
@@ -12844,19 +12845,21 @@ var $author$project$Main$projects = function (model) {
 												])),
 										{
 											q: $mdgriffith$elm_ui$Element$text('Source'),
-											s: 'https://github.com/Anfid/jwm'
+											s: 'https://github.com/Anfid/coppe-wm'
 										}),
 										A2(
 										$author$project$Main$techStack,
 										model.a,
 										_List_fromArray(
-											['Rust', 'Linux', 'X11', 'libxcb'])),
+											['Rust', 'Linux', 'WASM', 'X11', 'libxcb'])),
 										A2(
 										$mdgriffith$elm_ui$Element$paragraph,
 										A2($author$project$Styles$paragraph, model.a, _List_Nil),
 										_List_fromArray(
 											[
-												$mdgriffith$elm_ui$Element$text('Minimal Rust window manager for X11.')
+												$mdgriffith$elm_ui$Element$text('Window manager for X11 fully configurable with standalone WASM plugins. It is '),
+												$mdgriffith$elm_ui$Element$text('intended to be as feature-rich as possible, but only the most basic functionality '),
+												$mdgriffith$elm_ui$Element$text('is implemented at the moment.')
 											]))
 									]))
 							])),
@@ -13385,6 +13388,7 @@ var $author$project$Resume$historyEntry = F4(
 					content
 				]));
 	});
+var $mdgriffith$elm_ui$Element$Font$justify = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.c7);
 var $author$project$Resume$profileText = 'Software developer with passion for building reliable and efficient software, experienced ' + ('with Rust, Linux and blockchain. I love collaborating with ther developers to discuss ' + ('various approaches to a complex problem to provide the best possible solution and ' + 'learn from other people\'s experiences.'));
 var $author$project$Resume$body = A2(
 	$mdgriffith$elm_ui$Element$row,
