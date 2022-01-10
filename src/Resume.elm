@@ -45,7 +45,7 @@ body =
                 column [ Element.width fill, Element.spacing 10 ]
                     [ historyEntry
                         "Blockchain developer (Rust) at Gear"
-                        "August 2021 - Present"
+                        "August 2021 - December 2021"
                         "Moscow, Russia"
                       <|
                         Element.column
