@@ -13447,7 +13447,7 @@ var $author$project$Resume$body = A2(
 								A4(
 								$author$project$Resume$historyEntry,
 								'Blockchain developer (Rust) at Gear',
-								'August 2021 - Present',
+								'August 2021 - December 2021',
 								'Moscow, Russia',
 								A2(
 									$mdgriffith$elm_ui$Element$column,
