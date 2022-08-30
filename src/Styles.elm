@@ -1,9 +1,11 @@
-module Styles exposing (Style(..), bar, bgColor, button, heading, link, paragraph)
+module Styles exposing (Style(..), bar, bgColor, button, heading, link, paragraph, sansSerif, smallButton)
 
 import Element exposing (Color, fill, rgb255)
 import Element.Background as Background
+import Element.Border as Border
 import Element.Font as Font
 import Element.Region as Region
+import Html.Attributes
 
 
 type Style
@@ -18,6 +20,15 @@ type Style
 bar : Style -> List (Element.Attribute msg) -> List (Element.Attribute msg)
 bar style attributes =
     [ Element.width fill, Background.color <| barColor style ]
+        ++ attributes
+
+
+sansSerif : Style -> Int -> List (Element.Attribute msg) -> List (Element.Attribute msg)
+sansSerif style size attributes =
+    [ Font.color <| fgColor style
+    , Font.size size
+    , Font.family [ Font.typeface "Arial", Font.sansSerif ]
+    ]
         ++ attributes
 
 
@@ -43,7 +54,7 @@ heading style level attributes =
     in
     [ Font.color color
     , Font.size size
-    , Font.family [ Font.serif ]
+    , Font.family [ Font.typeface "Arial", Font.sansSerif ]
     , Element.paddingEach { left = padding, right = 0, top = 0, bottom = 0 }
     , Region.heading <| Basics.clamp 1 5 level
     ]
@@ -54,8 +65,9 @@ paragraph : Style -> List (Element.Attribute msg) -> List (Element.Attribute msg
 paragraph style attributes =
     [ Font.color <| fgColor style
     , Font.size 18
-    , Font.family [ Font.serif ]
+    , Font.family [ Font.typeface "Georgia", Font.serif ]
     , Font.alignLeft
+    , Element.spacing 10
     ]
         ++ attributes
 
@@ -63,8 +75,6 @@ paragraph style attributes =
 link : Style -> List (Element.Attribute msg) -> List (Element.Attribute msg)
 link style attributes =
     [ Font.color <| linkColor style
-    , Font.size 18
-    , Font.family [ Font.serif ]
     , Font.underline
     , Element.mouseDown [ Font.color <| linkPressColor style ]
     , Element.mouseOver [ Font.color <| linkFocusColor style ]
@@ -78,10 +88,24 @@ button style attributes =
     [ Element.padding 13
     , Background.color <| buttonColor style
     , Font.color <| fgColor style
-    , Font.family [ Font.serif ]
+    , Font.family [ Font.typeface "Georgia", Font.serif ]
     , Element.mouseDown [ Background.color <| buttonPressColor style ]
     , Element.mouseOver [ Background.color <| buttonHoverColor style ]
     , Element.focused [ Background.color <| buttonHoverColor style ]
+    ]
+        ++ attributes
+
+
+smallButton : Style -> List (Element.Attribute msg) -> List (Element.Attribute msg)
+smallButton style attributes =
+    [ Element.padding 10
+    , Background.color <| smallButtonColor style
+    , Font.color <| fgColor style
+    , Font.family [ Font.typeface "Verdana", Font.sansSerif ]
+    , Border.rounded 7
+    , Element.mouseDown [ Background.color <| smallButtonPressColor style ]
+    , Element.mouseOver [ Background.color <| smallButtonHoverColor style ]
+    , Element.focused [ Background.color <| smallButtonHoverColor style ]
     ]
         ++ attributes
 
@@ -97,14 +121,14 @@ bgColor style =
             rgb255 40 40 40
 
         Light ->
-            rgb255 255 255 255
+            rgb255 251 241 199
 
 
 fgColor : Style -> Color
 fgColor style =
     case style of
         Dark ->
-            rgb255 255 255 255
+            rgb255 251 241 199
 
         Light ->
             rgb255 40 40 40
@@ -189,3 +213,33 @@ buttonPressColor style =
 
         Light ->
             rgb255 211 63 14
+
+
+smallButtonColor : Style -> Color
+smallButtonColor style =
+    case style of
+        Dark ->
+            rgb255 50 50 50
+
+        Light ->
+            rgb255 241 231 189
+
+
+smallButtonHoverColor : Style -> Color
+smallButtonHoverColor style =
+    case style of
+        Dark ->
+            rgb255 60 60 60
+
+        Light ->
+            rgb255 246 236 194
+
+
+smallButtonPressColor : Style -> Color
+smallButtonPressColor style =
+    case style of
+        Dark ->
+            rgb255 45 45 45
+
+        Light ->
+            rgb255 236 226 184

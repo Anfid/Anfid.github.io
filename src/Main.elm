@@ -2,12 +2,13 @@ module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Navigation
-import Element exposing (Element, column, fill, px, text)
+import Element exposing (Element, column, fill, px)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
 import Element.Region as Region
+import ElementFix exposing (text)
 import Html.Attributes
 import Ports
 import Resume
@@ -34,7 +35,7 @@ main =
 
 init : Dimensions -> Url -> Navigation.Key -> ( Model, Cmd Msg )
 init keys url key =
-    ( gotoUrl url <| Model key keys url Styles.Dark Index, Cmd.none )
+    gotoUrl url <| Model key keys url Styles.Dark Index
 
 
 
@@ -75,6 +76,7 @@ type Msg
     | Goto String
     | ResumeMsg Resume.Msg
     | Print
+    | SwitchTheme
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -83,13 +85,25 @@ update msg model =
         LinkClicked urlRequest ->
             case urlRequest of
                 Browser.Internal url ->
-                    ( model, Navigation.pushUrl model.key (Url.toString url) )
+                    ( model, openInternalUrl model.key url )
 
                 Browser.External href ->
                     ( model, Navigation.load href )
 
         UrlChanged url ->
-            ( gotoUrl url model, Cmd.none )
+            gotoUrl url model
+
+        SwitchTheme ->
+            let
+                newStyle =
+                    case model.style of
+                        Styles.Light ->
+                            Styles.Dark
+
+                        Styles.Dark ->
+                            Styles.Light
+            in
+            ( { model | style = newStyle }, Cmd.none )
 
         Print ->
             ( model, Ports.printPage )
@@ -107,7 +121,7 @@ view model =
     { title = "Anfid.github.io"
     , body =
         [ Element.layout
-            [ Background.color <| Styles.bgColor model.style, Element.scrollbarY, Element.height fill, Element.width fill ]
+            [ Background.color <| Styles.bgColor model.style, Element.width fill ]
             (body model)
         ]
     }
@@ -171,8 +185,8 @@ body model =
 
         NotFound ->
             Element.column [ Element.spacing 70, Element.centerX, Element.centerY ]
-                [ Element.el (Styles.paragraph model.style [ Font.size 100, Element.centerX ]) <| text "404"
-                , Element.el (Styles.paragraph model.style [ Font.size 50, Element.centerX ]) <| text "Not Found"
+                [ Element.el (Styles.sansSerif model.style 100 [ Element.centerX ]) <| text "404"
+                , Element.el (Styles.sansSerif model.style 50 [ Element.centerX ]) <| text "Not Found"
                 , Element.link (Styles.button model.style [ Element.centerX ]) { label = Element.paragraph [] [ text "Let's go home?" ], url = "/" }
                 ]
 
@@ -183,43 +197,62 @@ body model =
 
 bar : Model -> List (Element Msg) -> Element Msg
 bar model contextActions =
+    let
+        ( styleIcon, styleAttributes ) =
+            case model.style of
+                Styles.Dark ->
+                    ( "/assets/sun.png", [ Element.htmlAttribute <| Html.Attributes.style "filter" "invert(90%)" ] )
+
+                Styles.Light ->
+                    ( "/assets/moon.png", [] )
+    in
     Element.row (Styles.bar model.style [])
         [ Element.link (Styles.button model.style []) { url = "/", label = text "Home" }
         , Element.link (Styles.button model.style []) { url = "/projects", label = text "Projects" }
         , Element.link (Styles.button model.style []) { url = "/resume", label = text "Resume" }
         , Element.row [ Element.alignRight ] contextActions
+        , Input.button (Styles.button model.style []) { onPress = Just SwitchTheme, label = Element.image ([ Element.centerX, Element.centerY, Element.height <| px 18 ] ++ styleAttributes) { src = styleIcon, description = "Theme icon" } }
         ]
 
 
 index : Model -> Element Msg
 index model =
-    column [ Element.width <| Element.maximum 900 fill, Element.paddingXY 50 0, Element.spacing 50, Element.centerX ]
+    column [ Element.width <| Element.maximum 900 fill, Element.padding 50, Element.spacing 50, Element.centerX ]
         [ Element.paragraph (Styles.paragraph model.style [])
-            [ text "Hello, my name is Mikhail Pogretskiy. I am Rust software developer, and this page is created as a "
-            , text "general overview of my software development background."
-            ]
-        , chapter "Navigation"
-            model.style
-            1
-            [ Element.paragraph (Styles.paragraph model.style [])
-                [ link model.style "resume" "/resume", text " (", link model.style "export/print view" "/resume/export", text ")" ]
-            , Element.paragraph (Styles.paragraph model.style [])
-                [ link model.style "projects" "/projects" ]
+            [ text <|
+                "Hello, my name is Mikhail Pogretskiy. I am Rust software developer, and this page is created as a "
+                    ++ "general overview of my software development background."
             ]
         , chapter "About me"
             model.style
             1
             [ Element.paragraph (Styles.paragraph model.style [])
-                [ text "Although my primary commercial Rust experience is related to blockchain and "
-                , text "Exonum blockchain framework, I extend my knowledge in other areas by creating personal "
-                , text "pet-projects with various level of polishness. They are usually limited to technical demos "
-                , text "due to lack of time and amount of these projects. See "
-                , link model.style "projects" "/projects"
-                , text " for more info."
+                [ text <|
+                    "My primary commercial Rust experience is related to blockchain, smart contracts and WASM. "
+                        ++ "Other than that, I extend my knowledge in other areas by creating personal "
+                        ++ "pet-projects with various levels of polish. They are usually quite limited "
+                        ++ "due to lack of time and amount of these projects."
                 ]
             , Element.paragraph (Styles.paragraph model.style [])
-                [ text "I have experience in creating and designing multithreaded systems, enjoy writing portable, "
-                , text "highly optimized code."
+                [ text <|
+                    "I have experience in creating and designing multithreaded systems, and I enjoy writing portable, "
+                        ++ "highly optimized code."
+                ]
+            ]
+        , chapter "More"
+            model.style
+            1
+            [ Element.paragraph (Styles.paragraph model.style [])
+                [ text "You can see "
+                , link model.style "my resume here" "/resume"
+                , text ". If you need to save or print it, "
+                , link model.style "click here" "/resume/export"
+                , text "."
+                ]
+            , Element.paragraph (Styles.paragraph model.style [])
+                [ text "Also check out my "
+                , link model.style "personal projects" "/projects"
+                , text "."
                 ]
             ]
         ]
@@ -227,7 +260,7 @@ index model =
 
 projects : Model -> Element Msg
 projects model =
-    column [ Element.width <| Element.maximum 900 fill, Element.paddingXY 50 0, Element.spacing 80, Element.centerX ]
+    column [ Element.width <| Element.maximum 900 fill, Element.paddingEach { top = 0, right = 0, bottom = 50, left = 0 }, Element.spacing 80, Element.centerX ]
         [ chapter "Rust"
             model.style
             1
@@ -238,20 +271,25 @@ projects model =
                     [ Element.image
                         [ Element.width <| px 200, Element.alignRight, Element.padding 15 ]
                         { src = "/assets/projects/dnd-stuff_demo.jpg", description = "dnd-stuff screenshot" }
-                    , Element.link (Styles.link model.style [ Element.paddingXY 20 0, Font.size 20 ]) { label = text "Source", url = "https://github.com/Anfid/dnd-stuff" }
+                    , Element.row [ Element.spacing 20 ]
+                        [ liveDemoButton model.style "/projects/dnd-stuff/index.html"
+                        , sourceButton model.style "https://github.com/Anfid/dnd-stuff"
+                        ]
                     , techStack model.style [ "Rust", "WASM", "Elm" ]
                     , Element.paragraph (Styles.paragraph model.style [])
                         [ text "An Elm + Rust web project inspired by "
                         , link model.style "rumkin.com/reference/dnd/diestats.php" "http://rumkin.com/reference/dnd/diestats.php"
-                        , text ". It shows probabilities of getting each value with specified dice combination. "
-                        , text "I was disappointed that it was practically impossible to see probabilities for "
-                        , text "more complex combinations due to poor performance and decided to try and create "
-                        , text "probabitity calculator with best performance possible."
+                        , text <|
+                            ". It shows probabilities of getting each value with specified dice combination. "
+                                ++ "I was disappointed that it was practically impossible to see probabilities for "
+                                ++ "more complex combinations due to poor performance and decided to try and create "
+                                ++ "probabitity calculator with best performance possible."
                         ]
                     , Element.paragraph (Styles.paragraph model.style [])
-                        [ text "This project uses Elm for page rendering and Rust library compiled into WASM "
-                        , text "for performance-sensitive calculations. Minimal necessary JS glue-code is confined "
-                        , text "to index.html file."
+                        [ text <|
+                            "This project uses Elm for page rendering and Rust library compiled into WASM "
+                                ++ "for performance-sensitive calculations. Minimal necessary JS glue-code is confined "
+                                ++ "to index.html file."
                         ]
                     ]
                 ]
@@ -262,12 +300,13 @@ projects model =
                     [ Element.image
                         [ Element.width <| px 300, Element.alignRight, Element.padding 15 ]
                         { src = "/assets/projects/coppe_demo.jpg", description = "coppe screenshot" }
-                    , Element.link (Styles.link model.style [ Element.paddingXY 20 0, Font.size 20 ]) { label = text "Source", url = "https://github.com/Anfid/coppe-wm" }
+                    , Element.row [ Element.spacing 20 ] [ sourceButton model.style "https://github.com/Anfid/coppe-wm" ]
                     , techStack model.style [ "Rust", "Linux", "WASM", "X11", "libxcb" ]
                     , Element.paragraph (Styles.paragraph model.style [])
-                        [ text "Window manager for X11 fully configurable with standalone WASM plugins. It is "
-                        , text "intended to be as feature-rich as possible, but only the most basic functionality "
-                        , text "is implemented at the moment."
+                        [ text <|
+                            "Window manager for X11 fully configurable with standalone WASM plugins. It is "
+                                ++ "intended to be as feature-rich as possible, but only the most basic functionality "
+                                ++ "is implemented at the moment."
                         ]
                     ]
                 ]
@@ -275,12 +314,13 @@ projects model =
                 model.style
                 2
                 [ Element.textColumn [ Element.spacing 15, Element.width fill ]
-                    [ Element.link (Styles.link model.style [ Element.paddingXY 20 0, Font.size 20 ]) { label = text "Source", url = "https://github.com/Anfid/water" }
+                    [ Element.row [ Element.spacing 20 ] [ sourceButton model.style "https://github.com/Anfid/water" ]
                     , techStack model.style [ "Rust", "cpal", "midir" ]
                     , Element.paragraph (Styles.paragraph model.style [])
-                        [ text "A simple Rust synthesyser for a MIDI keyboard. Currenly only CLI is available,"
-                        , text "UI is unimplemented. It is able to produce square sound wave with correct frequency "
-                        , text "for each key pressed."
+                        [ text <|
+                            "A simple Rust synthesyser for a MIDI keyboard. Currenly only CLI is available,"
+                                ++ "UI is unimplemented. It is able to produce square sound wave with correct frequency "
+                                ++ "for each key pressed."
                         ]
                     ]
                 ]
@@ -295,11 +335,10 @@ projects model =
                     [ Element.image
                         [ Element.width <| px 300, Element.alignRight, Element.padding 15 ]
                         { src = "/assets/projects/GItask_demo.jpg", description = "GItask screenshot" }
-                    , Element.link (Styles.link model.style [ Element.paddingXY 20 0, Font.size 20 ]) { label = text "Source", url = "https://github.com/Anfid/GItask" }
+                    , Element.row [ Element.spacing 20 ] [ sourceButton model.style "https://github.com/Anfid/GItask" ]
                     , techStack model.style [ "C++", "SDL", "CMake" ]
                     , Element.paragraph (Styles.paragraph model.style [])
-                        [ text "Small isometric C++ game written on SDL. Although project is very old, it is a "
-                        , text "fun demo still."
+                        [ text "Small isometric C++ game written on SDL. Although project is very old, it is a fun demo still."
                         ]
                     ]
                 ]
@@ -311,7 +350,7 @@ projects model =
                 model.style
                 2
                 [ Element.textColumn [ Element.spacing 15, Element.width fill ]
-                    [ Element.link (Styles.link model.style [ Element.paddingXY 20 0, Font.size 20 ]) { label = text "Source", url = "https://github.com/Anfid/Anfid.github.io" }
+                    [ Element.row [ Element.spacing 20 ] [ sourceButton model.style "https://github.com/Anfid/Anfid.github.io" ]
                     , techStack model.style [ "Elm", "elm-ui" ]
                     , Element.paragraph (Styles.paragraph model.style [])
                         [ text "Well, it's this page." ]
@@ -325,12 +364,12 @@ techStack : Style -> List String -> Element Msg
 techStack style stack =
     Element.column [ Element.spacing 10, Element.padding 5 ] <|
         (Element.el (Styles.heading style 3 []) <| text "Stack")
-            :: List.map (\el -> Element.el (Styles.paragraph style [ Element.paddingXY 25 0 ]) <| text <| "• " ++ el) stack
+            :: List.map (\el -> Element.row (Styles.paragraph style [ Element.paddingXY 25 0, Element.spacing 10 ]) [ Element.el [] <| text "•", Element.el [] <| text el ]) stack
 
 
 chapter : String -> Style -> Int -> List (Element Msg) -> Element Msg
 chapter heading style level content =
-    Element.column [ Element.width fill, Element.height fill, Element.spacing 30, Element.padding 10 ] <|
+    Element.column [ Element.width fill, Element.height fill, Element.spacing 30 ] <|
         [ Element.paragraph (Styles.heading style level []) <|
             [ text heading ]
         ]
@@ -340,6 +379,38 @@ chapter heading style level content =
 link : Style -> String -> String -> Element Msg
 link style label url =
     Element.link (Styles.link style []) { label = Element.paragraph [] [ text label ], url = url }
+
+
+smallMonochromeIconButton : Style -> String -> String -> String -> String -> Element Msg
+smallMonochromeIconButton style logo desc buttonText url =
+    Element.link (Styles.smallButton style [ Font.size 19 ])
+        { label =
+            Element.row [ Element.spacing 10 ]
+                [ Element.image
+                    ([ Element.width <| px 17, Element.height <| px 17 ]
+                        ++ (case style of
+                                Styles.Dark ->
+                                    [ Element.htmlAttribute <| Html.Attributes.style "filter" "invert(90%)" ]
+
+                                Styles.Light ->
+                                    []
+                           )
+                    )
+                    { src = logo, description = desc }
+                , Element.el [] <| text buttonText
+                ]
+        , url = url
+        }
+
+
+sourceButton : Style -> String -> Element Msg
+sourceButton style url =
+    smallMonochromeIconButton style "/assets/GitHub-Mark-32px.png" "GitHub logo" "Source" url
+
+
+liveDemoButton : Style -> String -> Element Msg
+liveDemoButton style url =
+    smallMonochromeIconButton style "/assets/play-button-arrowhead.png" "Live demo icon" "Live demo" url
 
 
 
@@ -360,6 +431,7 @@ type Route
     | ResumeRoute
     | ResumeExportRoute
     | ProjectsRoute
+    | ProjectsViewRoute String
 
 
 parser : Parser (Route -> a) a
@@ -369,26 +441,45 @@ parser =
         , Parser.map ResumeRoute (Parser.s "resume")
         , Parser.map ResumeExportRoute (Parser.s "resume" </> Parser.s "export")
         , Parser.map ProjectsRoute (Parser.s "projects")
+        , Parser.map ProjectsViewRoute
+            (Parser.oneOf
+                [ Parser.s "projects" </> Parser.string
+                , Parser.s "projects" </> Parser.string </> Parser.s "index.html"
+                ]
+            )
         ]
 
 
-gotoUrl : Url -> Model -> Model
+openInternalUrl : Navigation.Key -> Url -> Cmd Msg
+openInternalUrl key url =
+    case Parser.parse parser url of
+        Just (ProjectsViewRoute project) ->
+            Navigation.load <| "/projects/" ++ project ++ "/index.html"
+
+        _ ->
+            Navigation.pushUrl key (Url.toString url)
+
+
+gotoUrl : Url -> Model -> ( Model, Cmd Msg )
 gotoUrl url model =
     case Parser.parse parser url of
         Just IndexRoute ->
-            { model | page = Index }
+            ( { model | page = Index }, Cmd.none )
 
         Just ResumeRoute ->
-            { model | page = Resume }
+            ( { model | page = Resume }, Cmd.none )
 
         Just ResumeExportRoute ->
-            { model | page = ResumeExport }
+            ( { model | page = ResumeExport }, Cmd.none )
 
         Just ProjectsRoute ->
-            { model | page = Projects }
+            ( { model | page = Projects }, Cmd.none )
 
-        _ ->
-            { model | page = NotFound }
+        Just (ProjectsViewRoute project) ->
+            ( model, Navigation.load <| "/projects/" ++ project ++ "/index.html" )
+
+        Nothing ->
+            ( { model | page = NotFound }, Cmd.none )
 
 
 

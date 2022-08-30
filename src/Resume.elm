@@ -1,10 +1,11 @@
 module Resume exposing (Msg, view)
 
 import Browser
-import Element exposing (Color, Element, alignTop, centerX, column, el, fill, fillPortion, paragraph, px, rgb255, row, spacing, text, width, wrappedRow)
+import Element exposing (Color, Element, alignTop, centerX, column, el, fill, fillPortion, paragraph, px, rgb255, row, spacing, width, wrappedRow)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
+import ElementFix exposing (text)
 
 
 type alias Msg =
@@ -24,7 +25,7 @@ heading =
     row [ Element.spacing 10, Element.width <| Element.minimum 470 <| fill ]
         [ Element.image
             [ Element.width <| px 100, Border.rounded 20, Element.clip ]
-            { src = "/assets/resume_photo.jpg", description = "Photo" }
+            { src = "/assets/resume_photo.png", description = "Photo" }
         , column []
             [ el [ Element.padding 5, Font.color fgColor, Font.size 40, Font.family [ Font.serif ] ] <|
                 text "Mikhail Pogretskiy"
@@ -44,6 +45,22 @@ body =
             , bodyPart "Employment history" <|
                 column [ Element.width fill, Element.spacing 10 ]
                     [ historyEntry
+                        "Smart contract developer (Rust) at Bictory"
+                        "January 2022 - Present"
+                        "Remote"
+                      <|
+                        Element.column
+                            [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
+                            [ paragraph (textStyle [])
+                                [ text "Designing, implementing, documenting and integrating Concordium smart contracts for:" ]
+                            , paragraph (textStyle [])
+                                [ text "• Concordium name service" ]
+                            , paragraph (textStyle [])
+                                [ text "• Bictory NFT" ]
+                            , paragraph (textStyle [])
+                                [ text "• Data storage" ]
+                            ]
+                    , historyEntry
                         "Blockchain developer (Rust) at Gear"
                         "August 2021 - December 2021"
                         "Moscow, Russia"
@@ -51,11 +68,11 @@ body =
                         Element.column
                             [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
                             [ paragraph (textStyle [])
-                                [ text "Developing and maintaining Gear, a Substrate-based smart contract platform for Polkadot" ]
+                                [ text "Developing and maintaining Gear, a Substrate smart contract platform for Polkadot" ]
                             , paragraph (textStyle [])
-                                [ text "Designing and implementing smart contract library API" ]
+                                [ text "Creating smart contract library API" ]
                             , paragraph (textStyle [])
-                                [ text "Extending standalone test library API" ]
+                                [ text "Extending smart contract test library" ]
                             ]
                     , historyEntry
                         "Blockchain developer (Rust) at XDSoft"
@@ -65,9 +82,9 @@ body =
                         Element.column
                             [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
                             [ paragraph (textStyle [])
-                                [ text "Developing and maintaining Exonum blockchain framework fork with private transactions and GOST cryptography" ]
+                                [ text "Developing Exonum blockchain framework fork with private transactions and GOST cryptography" ]
                             , paragraph (textStyle [])
-                                [ text "Analyzing business requirements and implementing logic" ]
+                                [ text "Translating business requirements to granular tasks" ]
                             , paragraph (textStyle [])
                                 [ text "Creating automation scripts and setting up GitLab CI" ]
                             , paragraph (textStyle [])
@@ -81,7 +98,7 @@ body =
                         column
                             [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
                             [ paragraph (textStyle [])
-                                [ text "Developing and maintaining Linux-based and embedded security systems" ]
+                                [ text "Developing and maintaining Linux and RTOS embedded security systems" ]
                             , paragraph (textStyle [])
                                 [ text "Improving device network connection stability" ]
                             ]
@@ -110,7 +127,9 @@ body =
                         , label = el (extrasTextStyle [ Element.alignRight ]) <| text "mikhail.pogretskiy@gmail.com"
                         }
                     , el (extrasTextStyle [ Font.bold ]) <| text "Telegram"
-                    , el (extrasTextStyle []) <| text "+7 (910) 898-86-79"
+                    , el (extrasTextStyle []) <| text "@Anfid"
+                    , el (extrasTextStyle [ Font.bold ]) <| text "Mobile"
+                    , el (extrasTextStyle []) <| text "+995 (595) 46 56 29"
                     ]
             , extraEntry "Date/Place of birth" <|
                 paragraph
@@ -126,7 +145,11 @@ body =
                 Element.link
                     (extrasTextStyle [ Element.spacing 5 ])
                     { url = "https://github.com/Anfid"
-                    , label = el (extrasTextStyle [ Element.alignRight ]) <| text "github.com/Anfid"
+                    , label =
+                        row []
+                            [ Element.image [ Element.width <| px 15 ] { src = "/assets/GitHub-Mark-32px.png", description = "GitHub logo" }
+                            , el (extrasTextStyle [ Element.alignRight ]) <| text "Anfid"
+                            ]
                     }
             , extraEntry "Programming languages" <|
                 column
@@ -139,10 +162,10 @@ body =
             , extraEntry "Skills" <|
                 column
                     (extrasTextStyle [ Element.spacing 5 ])
-                    [ el [] <| text "Linux"
+                    [ el [] <| text "*NIX"
                     , el [] <| text "Git"
                     , el [] <| text "WASM"
-                    , el [] <| text "x86_64 ASM"
+                    , el [] <| text "x86 ASM"
                     ]
             , extraEntry "Languages" <|
                 column
@@ -189,9 +212,9 @@ extraEntry title content =
 profileText : String
 profileText =
     "Software developer with passion for building reliable and efficient software, experienced "
-        ++ "with Rust, Linux and blockchain. I love collaborating with ther developers to discuss "
-        ++ "various approaches to a complex problem to provide the best possible solution and "
-        ++ "learn from other people's experiences."
+        ++ "with Rust, *NIX and blockchain. I love collaborating with other developers to discuss "
+        ++ "various approaches to complex problems to provide the best solution and learn from "
+        ++ "other people's experiences."
 
 
 
