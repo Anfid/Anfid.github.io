@@ -13713,7 +13713,7 @@ var $author$project$Resume$body = A2(
 								A4(
 								$author$project$Resume$historyEntry,
 								'Smart contract developer (Rust) at Bictory',
-								'January 2022 - Present',
+								'January 2022 - October 2022',
 								'Remote',
 								A2(
 									$mdgriffith$elm_ui$Element$column,

@@ -6,6 +6,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import ElementFix exposing (text)
+import Html exposing (Html)
 
 
 type alias Msg =
@@ -46,7 +47,7 @@ body =
                 column [ Element.width fill, Element.spacing 10 ]
                     [ historyEntry
                         "Smart contract developer (Rust) at Bictory"
-                        "January 2022 - Present"
+                        "January 2022 - October 2022"
                         "Remote"
                       <|
                         Element.column
