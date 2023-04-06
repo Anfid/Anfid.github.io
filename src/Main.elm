@@ -118,7 +118,7 @@ update msg model =
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "Anfid.github.io"
+    { title = "Mikhail Pogretskiy"
     , body =
         [ Element.layout
             [ Background.color <| Styles.bgColor model.style, Element.width fill ]
@@ -129,6 +129,15 @@ view model =
 
 body : Model -> Element Msg
 body model =
+    let
+        iconStyle =
+            case model.style of
+                Styles.Dark ->
+                    [ Element.htmlAttribute <| Html.Attributes.style "filter" "invert(90%)" ]
+
+                Styles.Light ->
+                    []
+    in
     case model.page of
         Index ->
             column [ Element.width fill, Element.height fill, Element.spacing 30 ]
@@ -137,10 +146,24 @@ body model =
                 ]
 
         Resume ->
-            column [ Element.width <| Element.minimum 570 fill, Element.spacing 50 ]
-                [ bar model [ Element.link (Styles.button model.style []) { url = "/resume/export", label = text "Export/Print" } ]
+            column [ Element.width <| Element.minimum 570 fill ]
+                [ bar model
+                    [ Element.downloadAs (Styles.button model.style [])
+                        { label =
+                            Element.image ([ Element.centerX, Element.centerY, Element.height <| px 20, Element.width <| px 20 ] ++ iconStyle)
+                                { src = "/assets/download.png", description = "Download" }
+                        , filename = "Mikhail-Pogretskiy.pdf"
+                        , url = "/assets/resume.pdf"
+                        }
+                    , Element.link (Styles.button model.style [])
+                        { url = "/resume/export"
+                        , label =
+                            Element.image ([ Element.centerX, Element.centerY, Element.height <| px 20, Element.width <| px 20 ] ++ iconStyle)
+                                { src = "/assets/print.png", description = "Print" }
+                        }
+                    ]
                 , Element.el
-                    [ Element.width <| Element.minimum 570 <| Element.maximum 800 fill, Element.centerX ]
+                    [ Element.width <| Element.minimum 580 <| Element.maximum 810 fill, Element.centerX, Element.paddingXY 5 50 ]
                   <|
                     Element.map LinkClicked Resume.view
                 ]
@@ -163,7 +186,9 @@ body model =
                                 [ Element.paddingEach { left = 25, right = 10, top = 5, bottom = 15 }
                                 , Font.size 25
                                 ]
-                                (text "Print")
+                                (Element.image ([ Element.centerX, Element.centerY, Element.height <| px 32, Element.width <| px 32 ] ++ iconStyle)
+                                    { src = "/assets/print.png", description = "Print" }
+                                )
                         }
                 ]
             <|
@@ -175,7 +200,7 @@ body model =
                     ]
                 <|
                     Element.map LinkClicked <|
-                        Resume.view
+                        Resume.contentView
 
         Projects ->
             column [ Element.width fill, Element.height fill, Element.spacing 30 ]
@@ -211,7 +236,10 @@ bar model contextActions =
         , Element.link (Styles.button model.style []) { url = "/projects", label = text "Projects" }
         , Element.link (Styles.button model.style []) { url = "/resume", label = text "Resume" }
         , Element.row [ Element.alignRight ] contextActions
-        , Input.button (Styles.button model.style []) { onPress = Just SwitchTheme, label = Element.image ([ Element.centerX, Element.centerY, Element.height <| px 18 ] ++ styleAttributes) { src = styleIcon, description = "Theme icon" } }
+        , Input.button (Styles.button model.style [])
+            { onPress = Just SwitchTheme
+            , label = Element.image ([ Element.centerX, Element.centerY, Element.height <| px 20, Element.width <| px 20 ] ++ styleAttributes) { src = styleIcon, description = "Dark/Light mode switch" }
+            }
         ]
 
 
@@ -231,7 +259,7 @@ index model =
                     "My primary commercial Rust experience is related to blockchain, smart contracts and WASM. "
                         ++ "Other than that, I extend my knowledge in other areas by creating personal "
                         ++ "pet-projects with various levels of polish. They are usually quite limited "
-                        ++ "due to lack of time and amount of these projects."
+                        ++ "due to lack of time and the amount of these projects."
                 ]
             , Element.paragraph (Styles.paragraph model.style [])
                 [ text <|
@@ -243,10 +271,10 @@ index model =
             model.style
             1
             [ Element.paragraph (Styles.paragraph model.style [])
-                [ text "You can see "
+                [ text "You can find "
                 , link model.style "my resume here" "/resume"
-                , text ". If you need to save or print it, "
-                , link model.style "click here" "/resume/export"
+                , text ". If you need to download it, "
+                , Element.downloadAs (Styles.link model.style []) { label = text "click here", filename = "Mikhail-Pogretskiy.pdf", url = "/assets/resume.pdf" }
                 , text "."
                 ]
             , Element.paragraph (Styles.paragraph model.style [])
@@ -260,7 +288,7 @@ index model =
 
 projects : Model -> Element Msg
 projects model =
-    column [ Element.width <| Element.maximum 900 fill, Element.paddingEach { top = 0, right = 0, bottom = 50, left = 0 }, Element.spacing 80, Element.centerX ]
+    column [ Element.width <| Element.maximum 900 fill, Element.paddingEach { top = 0, right = 20, bottom = 50, left = 20 }, Element.spacing 80, Element.centerX ]
         [ chapter "Rust"
             model.style
             1
@@ -269,7 +297,7 @@ projects model =
                 2
                 [ Element.textColumn [ Element.spacing 15, Element.width fill ]
                     [ Element.image
-                        [ Element.width <| px 200, Element.alignRight, Element.padding 15 ]
+                        [ Element.width <| px 200, Element.alignRight, Element.padding 5 ]
                         { src = "/assets/projects/dnd-stuff_demo.jpg", description = "dnd-stuff screenshot" }
                     , Element.row [ Element.spacing 20 ]
                         [ liveDemoButton model.style "/projects/dnd-stuff/index.html"
@@ -299,7 +327,7 @@ projects model =
                 [ Element.textColumn [ Element.spacing 15, Element.width fill ]
                     [ Element.image
                         [ Element.width <| px 300, Element.alignRight, Element.padding 15 ]
-                        { src = "/assets/projects/coppe_demo.jpg", description = "coppe screenshot" }
+                        { src = "/assets/projects/coppe_demo.jpg", description = "coppe-wm screenshot" }
                     , Element.row [ Element.spacing 20 ] [ sourceButton model.style "https://github.com/Anfid/coppe-wm" ]
                     , techStack model.style [ "Rust", "Linux", "WASM", "X11", "libxcb" ]
                     , Element.paragraph (Styles.paragraph model.style [])

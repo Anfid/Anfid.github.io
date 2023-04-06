@@ -1,4 +1,4 @@
-module Resume exposing (Msg, view)
+module Resume exposing (Msg, contentView, view)
 
 import Browser
 import Element exposing (Color, Element, alignTop, centerX, column, el, fill, fillPortion, paragraph, px, rgb255, row, spacing, width, wrappedRow)
@@ -7,6 +7,7 @@ import Element.Border as Border
 import Element.Font as Font
 import ElementFix exposing (text)
 import Html exposing (Html)
+import Html.Attributes
 
 
 type alias Msg =
@@ -15,7 +16,12 @@ type alias Msg =
 
 view : Element Msg
 view =
-    column [ Element.width <| Element.minimum 570 <| fill, Element.padding 50, Element.spacing 50, Background.color bgColor ]
+    el [ Element.padding 50, Background.color bgColor ] contentView
+
+
+contentView : Element Msg
+contentView =
+    column [ Element.width <| Element.minimum 520 <| fill, Element.spacing 50, Background.color bgColor ]
         [ heading
         , body
         ]
@@ -25,8 +31,8 @@ heading : Element Msg
 heading =
     row [ Element.spacing 10, Element.width <| Element.minimum 470 <| fill ]
         [ Element.image
-            [ Element.width <| px 100, Border.rounded 20, Element.clip ]
-            { src = "/assets/resume_photo.png", description = "Photo" }
+            [ Element.width <| px 100, Element.height <| px 100, Border.rounded 20, Element.clip ]
+            { src = "/assets/resume_photo.png", description = "" }
         , column []
             [ el [ Element.padding 5, Font.color fgColor, Font.size 40, Font.family [ Font.serif ] ] <|
                 text "Mikhail Pogretskiy"
@@ -49,22 +55,20 @@ body =
                         "Smart contract developer (Rust) at Bictory"
                         "January 2022 - October 2022"
                         "Remote"
+                        (Just [ "Rust", "WASM", "Concordium" ])
                       <|
                         Element.column
                             [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
                             [ paragraph (textStyle [])
-                                [ text "Designing, implementing, documenting and integrating Concordium smart contracts for:" ]
+                                [ text "Designing, implementing, documenting and integrating WASM smart contracts in Concordium ecosystem." ]
                             , paragraph (textStyle [])
-                                [ text "• Concordium name service" ]
-                            , paragraph (textStyle [])
-                                [ text "• Bictory NFT" ]
-                            , paragraph (textStyle [])
-                                [ text "• Data storage" ]
+                                [ text "Optimizing the size of WASM modules." ]
                             ]
                     , historyEntry
                         "Blockchain developer (Rust) at Gear"
                         "August 2021 - December 2021"
                         "Moscow, Russia"
+                        (Just [ "Rust", "Substrate" ])
                       <|
                         Element.column
                             [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
@@ -79,6 +83,7 @@ body =
                         "Blockchain developer (Rust) at XDSoft"
                         "September 2019 - March 2021"
                         "Novosibirsk, Russia"
+                        (Just [ "Rust", "Tokio", "GitLab CI" ])
                       <|
                         Element.column
                             [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
@@ -95,6 +100,7 @@ body =
                         "Embedded developer (C/C++) at MERA"
                         "March 2018 - September 2019"
                         "Nizhniy Novgorod, Russia"
+                        (Just [ "C/C++", "Embedded", "Networks", "RTOS" ])
                       <|
                         column
                             [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
@@ -110,6 +116,7 @@ body =
                         "Nizhniy Novgorod Technical College"
                         "October 2013 - October 2017"
                         "Nizhniy Novgorod, Russia"
+                        Nothing
                       <|
                         column
                             [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
@@ -188,9 +195,9 @@ bodyPart title content =
         ]
 
 
-historyEntry : String -> String -> String -> Element Msg -> Element Msg
-historyEntry title dates location content =
-    column [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 }, Element.width fill ]
+historyEntry : String -> String -> String -> Maybe (List String) -> Element Msg -> Element Msg
+historyEntry title dates location skills content =
+    column [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 }, Element.width fill, Element.htmlAttribute <| Html.Attributes.style "break-inside" "avoid" ]
         [ paragraph
             [ Element.padding 5, Font.color fgColor, Font.size 18, Font.family [ Font.serif ], Font.bold ]
             [ text title ]
@@ -198,6 +205,14 @@ historyEntry title dates location content =
             [ text dates |> el (textStyle [ Font.size 14, Font.color fgFadedColor, Element.alignLeft ])
             , text location |> el (textStyle [ Font.size 14, Font.color fgFadedColor, Element.alignRight ])
             ]
+        , case skills of
+            Just skillList ->
+                row
+                    [ Element.padding 5, Element.spacing 5, Font.color fgColor, Font.size 14, Font.family [ Font.serif ], Font.bold, Element.alignLeft ]
+                    (List.map (\skill -> el [ Element.padding 5, Background.color <| rgb255 235 235 235, Border.rounded 5 ] (text skill)) skillList)
+
+            Nothing ->
+                Element.none
         , content
         ]
 
