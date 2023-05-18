@@ -7,7 +7,6 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
-import Element.Region as Region
 import ElementFix exposing (text)
 import Html.Attributes
 import Ports
@@ -73,8 +72,6 @@ type Msg
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url
     | Resize Int Int
-    | Goto String
-    | ResumeMsg Resume.Msg
     | Print
     | SwitchTheme
 
@@ -121,7 +118,7 @@ view model =
     { title = "Mikhail Pogretskiy"
     , body =
         [ Element.layout
-            [ Background.color <| Styles.bgColor model.style, Element.width fill ]
+            [ Element.width fill ]
             (body model)
         ]
     }
@@ -140,13 +137,13 @@ body model =
     in
     case model.page of
         Index ->
-            column [ Element.width fill, Element.height fill, Element.spacing 30 ]
+            column [ Background.color <| Styles.bgColor model.style, Element.width fill, Element.height fill, Element.spacing 30 ]
                 [ bar model []
                 , index model
                 ]
 
         Resume ->
-            column [ Element.width <| Element.minimum 570 fill ]
+            column [ Background.color <| Styles.bgColor model.style, Element.width <| Element.minimum 570 fill ]
                 [ bar model
                     [ Element.downloadAs (Styles.button model.style [])
                         { label =
@@ -163,7 +160,7 @@ body model =
                         }
                     ]
                 , Element.el
-                    [ Element.width <| Element.minimum 580 <| Element.maximum 810 fill, Element.centerX, Element.paddingXY 5 50 ]
+                    [ Element.width <| Element.minimum 580 <| Element.maximum 840 fill, Element.centerX, Element.paddingXY 5 50 ]
                   <|
                     Element.map LinkClicked Resume.view
                 ]
@@ -203,13 +200,13 @@ body model =
                         Resume.contentView
 
         Projects ->
-            column [ Element.width fill, Element.height fill, Element.spacing 30 ]
+            column [ Background.color <| Styles.bgColor model.style, Element.width fill, Element.height fill, Element.spacing 30 ]
                 [ bar model []
                 , projects model
                 ]
 
         NotFound ->
-            Element.column [ Element.spacing 70, Element.centerX, Element.centerY ]
+            Element.column [ Background.color <| Styles.bgColor model.style, Element.spacing 70, Element.centerX, Element.centerY ]
                 [ Element.el (Styles.sansSerif model.style 100 [ Element.centerX ]) <| text "404"
                 , Element.el (Styles.sansSerif model.style 50 [ Element.centerX ]) <| text "Not Found"
                 , Element.link (Styles.button model.style [ Element.centerX ]) { label = Element.paragraph [] [ text "Let's go home?" ], url = "/" }
@@ -398,10 +395,8 @@ techStack style stack =
 chapter : String -> Style -> Int -> List (Element Msg) -> Element Msg
 chapter heading style level content =
     Element.column [ Element.width fill, Element.height fill, Element.spacing 30 ] <|
-        [ Element.paragraph (Styles.heading style level []) <|
-            [ text heading ]
-        ]
-            ++ content
+        Element.paragraph (Styles.heading style level []) [ text heading ]
+            :: content
 
 
 link : Style -> String -> String -> Element Msg
@@ -515,5 +510,5 @@ gotoUrl url model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
     Sub.none

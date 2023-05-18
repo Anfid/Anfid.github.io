@@ -6081,7 +6081,7 @@ var $author$project$Main$init = F3(
 var $elm$json$Json$Decode$int = _Json_decodeInt;
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$Main$subscriptions = function (model) {
+var $author$project$Main$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
 var $author$project$Styles$Light = 1;
@@ -6165,7 +6165,7 @@ var $author$project$Main$update = F2(
 			case 1:
 				var url = msg.a;
 				return A2($author$project$Main$gotoUrl, url, model);
-			case 6:
+			case 4:
 				var newStyle = function () {
 					var _v2 = model.a;
 					if (_v2 === 1) {
@@ -6179,12 +6179,21 @@ var $author$project$Main$update = F2(
 						model,
 						{a: newStyle}),
 					$elm$core$Platform$Cmd$none);
-			case 5:
+			case 3:
 				return _Utils_Tuple2(model, $author$project$Ports$printPage);
 			default:
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
 	});
+var $author$project$Main$Print = {$: 3};
+var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
+	return {$: 6, a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$Left = 0;
+var $mdgriffith$elm_ui$Element$alignLeft = $mdgriffith$elm_ui$Internal$Model$AlignX(0);
+var $mdgriffith$elm_ui$Internal$Model$Right = 2;
+var $mdgriffith$elm_ui$Element$alignRight = $mdgriffith$elm_ui$Internal$Model$AlignX(2);
+var $author$project$Main$SwitchTheme = {$: 4};
 var $mdgriffith$elm_ui$Internal$Model$Rgba = F4(
 	function (a, b, c, d) {
 		return {$: 0, a: a, b: b, c: c, d: d};
@@ -6193,22 +6202,6 @@ var $mdgriffith$elm_ui$Element$rgb255 = F3(
 	function (red, green, blue) {
 		return A4($mdgriffith$elm_ui$Internal$Model$Rgba, red / 255, green / 255, blue / 255, 1);
 	});
-var $author$project$Styles$bgColor = function (style) {
-	if (!style) {
-		return A3($mdgriffith$elm_ui$Element$rgb255, 40, 40, 40);
-	} else {
-		return A3($mdgriffith$elm_ui$Element$rgb255, 251, 241, 199);
-	}
-};
-var $author$project$Main$Print = {$: 5};
-var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
-	return {$: 6, a: a};
-};
-var $mdgriffith$elm_ui$Internal$Model$Left = 0;
-var $mdgriffith$elm_ui$Element$alignLeft = $mdgriffith$elm_ui$Internal$Model$AlignX(0);
-var $mdgriffith$elm_ui$Internal$Model$Right = 2;
-var $mdgriffith$elm_ui$Element$alignRight = $mdgriffith$elm_ui$Internal$Model$AlignX(2);
-var $author$project$Main$SwitchTheme = {$: 6};
 var $author$project$Styles$barColor = function (style) {
 	if (!style) {
 		return A3($mdgriffith$elm_ui$Element$rgb255, 66, 165, 70);
@@ -12382,6 +12375,13 @@ var $author$project$Main$bar = F2(
 					})
 				]));
 	});
+var $author$project$Styles$bgColor = function (style) {
+	if (!style) {
+		return A3($mdgriffith$elm_ui$Element$rgb255, 40, 40, 40);
+	} else {
+		return A3($mdgriffith$elm_ui$Element$rgb255, 251, 241, 199);
+	}
+};
 var $mdgriffith$elm_ui$Internal$Model$AsColumn = 1;
 var $mdgriffith$elm_ui$Internal$Model$asColumn = 1;
 var $mdgriffith$elm_ui$Element$column = F2(
@@ -12472,7 +12472,7 @@ var $author$project$Resume$bodyPart = F2(
 						[
 							$mdgriffith$elm_ui$Element$padding(5),
 							$mdgriffith$elm_ui$Element$Font$color($author$project$Resume$fgColor),
-							$mdgriffith$elm_ui$Element$Font$size(22),
+							$mdgriffith$elm_ui$Element$Font$size(20),
 							$mdgriffith$elm_ui$Element$Font$family(
 							_List_fromArray(
 								[$mdgriffith$elm_ui$Element$Font$serif])),
@@ -12553,7 +12553,7 @@ var $author$project$Resume$extraEntry = F2(
 							$mdgriffith$elm_ui$Element$padding(5),
 							$mdgriffith$elm_ui$Element$Font$bold,
 							$mdgriffith$elm_ui$Element$Font$color($author$project$Resume$fgColor),
-							$mdgriffith$elm_ui$Element$Font$size(18),
+							$mdgriffith$elm_ui$Element$Font$size(17),
 							$mdgriffith$elm_ui$Element$Font$family(
 							_List_fromArray(
 								[$mdgriffith$elm_ui$Element$Font$serif]))
@@ -12578,13 +12578,12 @@ var $author$project$Resume$extrasTextStyle = $elm$core$Basics$append(
 		[
 			$mdgriffith$elm_ui$Element$padding(5),
 			$mdgriffith$elm_ui$Element$Font$color($author$project$Resume$fgColor),
-			$mdgriffith$elm_ui$Element$Font$size(14),
+			$mdgriffith$elm_ui$Element$Font$size(13),
 			$mdgriffith$elm_ui$Element$Font$family(
 			_List_fromArray(
 				[$mdgriffith$elm_ui$Element$Font$serif]))
 		]));
 var $author$project$Resume$fgFadedColor = A3($mdgriffith$elm_ui$Element$rgb255, 100, 100, 100);
-var $mdgriffith$elm_ui$Element$fillPortion = $mdgriffith$elm_ui$Internal$Model$Fill;
 var $mdgriffith$elm_ui$Element$none = $mdgriffith$elm_ui$Internal$Model$Empty;
 var $mdgriffith$elm_ui$Internal$Flag$borderRound = $mdgriffith$elm_ui$Internal$Flag$flag(17);
 var $mdgriffith$elm_ui$Element$Border$rounded = function (radius) {
@@ -12602,7 +12601,7 @@ var $author$project$Resume$textStyle = $elm$core$Basics$append(
 		[
 			$mdgriffith$elm_ui$Element$padding(5),
 			$mdgriffith$elm_ui$Element$Font$color($author$project$Resume$fgColor),
-			$mdgriffith$elm_ui$Element$Font$size(18),
+			$mdgriffith$elm_ui$Element$Font$size(16),
 			$mdgriffith$elm_ui$Element$Font$family(
 			_List_fromArray(
 				[$mdgriffith$elm_ui$Element$Font$serif]))
@@ -12815,7 +12814,7 @@ var $author$project$Resume$historyEntry = F5(
 						[
 							$mdgriffith$elm_ui$Element$padding(5),
 							$mdgriffith$elm_ui$Element$Font$color($author$project$Resume$fgColor),
-							$mdgriffith$elm_ui$Element$Font$size(18),
+							$mdgriffith$elm_ui$Element$Font$size(17),
 							$mdgriffith$elm_ui$Element$Font$family(
 							_List_fromArray(
 								[$mdgriffith$elm_ui$Element$Font$serif])),
@@ -12838,7 +12837,7 @@ var $author$project$Resume$historyEntry = F5(
 							$author$project$Resume$textStyle(
 								_List_fromArray(
 									[
-										$mdgriffith$elm_ui$Element$Font$size(14),
+										$mdgriffith$elm_ui$Element$Font$size(13),
 										$mdgriffith$elm_ui$Element$Font$color($author$project$Resume$fgFadedColor),
 										$mdgriffith$elm_ui$Element$alignLeft
 									])),
@@ -12848,7 +12847,7 @@ var $author$project$Resume$historyEntry = F5(
 							$author$project$Resume$textStyle(
 								_List_fromArray(
 									[
-										$mdgriffith$elm_ui$Element$Font$size(14),
+										$mdgriffith$elm_ui$Element$Font$size(13),
 										$mdgriffith$elm_ui$Element$Font$color($author$project$Resume$fgFadedColor),
 										$mdgriffith$elm_ui$Element$alignRight
 									])),
@@ -12864,7 +12863,7 @@ var $author$project$Resume$historyEntry = F5(
 									$mdgriffith$elm_ui$Element$padding(5),
 									$mdgriffith$elm_ui$Element$spacing(5),
 									$mdgriffith$elm_ui$Element$Font$color($author$project$Resume$fgColor),
-									$mdgriffith$elm_ui$Element$Font$size(14),
+									$mdgriffith$elm_ui$Element$Font$size(13),
 									$mdgriffith$elm_ui$Element$Font$family(
 									_List_fromArray(
 										[$mdgriffith$elm_ui$Element$Font$serif])),
@@ -12893,8 +12892,8 @@ var $author$project$Resume$historyEntry = F5(
 					content
 				]));
 	});
-var $mdgriffith$elm_ui$Internal$Flag$fontAlignment = $mdgriffith$elm_ui$Internal$Flag$flag(12);
-var $mdgriffith$elm_ui$Element$Font$justify = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.c8);
+var $author$project$Resume$lcolMaxWidth = 1000;
+var $author$project$Resume$lcolMinWidth = 250;
 var $mdgriffith$elm_ui$Internal$Model$Max = F2(
 	function (a, b) {
 		return {$: 4, a: a, b: b};
@@ -12911,7 +12910,40 @@ var $mdgriffith$elm_ui$Element$minimum = F2(
 	function (i, l) {
 		return A2($mdgriffith$elm_ui$Internal$Model$Min, i, l);
 	});
-var $author$project$Resume$profileText = 'Software developer with passion for building reliable and efficient software, experienced ' + ('with Rust, *NIX and blockchain. I love collaborating with other developers to discuss ' + ('various approaches to complex problems to provide the best solution and learn from ' + 'other people\'s experiences.'));
+var $author$project$Resume$rcolWidth = 200;
+var $mdgriffith$elm_ui$Internal$Model$AsTextColumn = 5;
+var $mdgriffith$elm_ui$Internal$Model$asTextColumn = 5;
+var $mdgriffith$elm_ui$Element$textColumn = F2(
+	function (attrs, children) {
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asTextColumn,
+			$mdgriffith$elm_ui$Internal$Model$div,
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Element$width(
+					A2(
+						$mdgriffith$elm_ui$Element$maximum,
+						750,
+						A2($mdgriffith$elm_ui$Element$minimum, 500, $mdgriffith$elm_ui$Element$fill))),
+				attrs),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
+	});
+var $author$project$Resume$textColumnFromStrings = F2(
+	function (attributes, paragraphs) {
+		return A2(
+			$mdgriffith$elm_ui$Element$textColumn,
+			attributes,
+			A2(
+				$elm$core$List$map,
+				function (p) {
+					return A2(
+						$mdgriffith$elm_ui$Element$paragraph,
+						_List_Nil,
+						A2($elm$core$List$map, $author$project$ElementFix$text, p));
+				},
+				paragraphs));
+	});
 var $author$project$Resume$body = A2(
 	$mdgriffith$elm_ui$Element$row,
 	_List_fromArray(
@@ -12920,8 +12952,8 @@ var $author$project$Resume$body = A2(
 			$mdgriffith$elm_ui$Element$width(
 			A2(
 				$mdgriffith$elm_ui$Element$minimum,
-				(250 + 200) + 20,
-				A2($mdgriffith$elm_ui$Element$maximum, (1000 + 250) + 20, $mdgriffith$elm_ui$Element$fill)))
+				($author$project$Resume$lcolMinWidth + $author$project$Resume$rcolWidth) + 20,
+				A2($mdgriffith$elm_ui$Element$maximum, ($author$project$Resume$lcolMaxWidth + $author$project$Resume$rcolWidth) + 20, $mdgriffith$elm_ui$Element$fill)))
 		]),
 	_List_fromArray(
 		[
@@ -12932,11 +12964,8 @@ var $author$project$Resume$body = A2(
 					$mdgriffith$elm_ui$Element$width(
 					A2(
 						$mdgriffith$elm_ui$Element$minimum,
-						250,
-						A2(
-							$mdgriffith$elm_ui$Element$maximum,
-							1000,
-							$mdgriffith$elm_ui$Element$fillPortion(2)))),
+						$author$project$Resume$lcolMinWidth,
+						A2($mdgriffith$elm_ui$Element$maximum, $author$project$Resume$lcolMaxWidth, $mdgriffith$elm_ui$Element$fill))),
 					$mdgriffith$elm_ui$Element$spacing(25),
 					$mdgriffith$elm_ui$Element$alignTop
 				]),
@@ -12944,15 +12973,23 @@ var $author$project$Resume$body = A2(
 				[
 					A2(
 					$author$project$Resume$bodyPart,
-					'Profile',
+					'About me',
 					A2(
-						$mdgriffith$elm_ui$Element$paragraph,
+						$author$project$Resume$textColumnFromStrings,
 						$author$project$Resume$textStyle(
 							_List_fromArray(
-								[$mdgriffith$elm_ui$Element$Font$justify])),
+								[
+									$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+									$mdgriffith$elm_ui$Element$spacing(10)
+								])),
 						_List_fromArray(
 							[
-								$author$project$ElementFix$text($author$project$Resume$profileText)
+								_List_fromArray(
+								['I\'m a Rust engineer experienced in Rust, WASM, UNIX and blockchain. My C/C++ embedded background provided me ', 'with deep understanding of how software works on the lowest level and how it interacts with hardware. During ', 'software development my main priority is it\'s reliability and security. I put in extra effort to make sure ', 'that it adheres to best practices and applicable open standards.']),
+								_List_fromArray(
+								['I have significant experience in organizing work on a project and prioritizing key features and tasks. I ', 'proactively engage in discussions of what project or feature aims to achieve and what is required to ', 'implement it. This allows me to identify potential difficult points early on, provide swift feedback and ', 'set realistic goals or come up with a good compromise if resources are limited.']),
+								_List_fromArray(
+								['And of course I always remain open to learning from other people or from my own experiences. I feel like this ', 'is a must for being a good developer in a rapidly-changing software development world.'])
 							]))),
 					A2(
 					$author$project$Resume$bodyPart,
@@ -12973,30 +13010,27 @@ var $author$project$Resume$body = A2(
 								'Remote',
 								$elm$core$Maybe$Just(
 									_List_fromArray(
-										['Rust', 'WASM', 'Concordium'])),
+										['Rust', 'Smart Contracts', 'WASM', 'Concordium'])),
 								A2(
-									$mdgriffith$elm_ui$Element$column,
+									$author$project$Resume$textColumnFromStrings,
+									$author$project$Resume$textStyle(
+										_List_fromArray(
+											[
+												$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+												$mdgriffith$elm_ui$Element$paddingEach(
+												{aY: 0, be: 10, bx: 0, bC: 0}),
+												$mdgriffith$elm_ui$Element$spacing(7)
+											])),
 									_List_fromArray(
 										[
-											$mdgriffith$elm_ui$Element$paddingEach(
-											{aY: 0, be: 20, bx: 0, bC: 0})
-										]),
-									_List_fromArray(
-										[
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Designing, implementing, documenting and integrating WASM smart contracts in Concordium ecosystem.')
-												])),
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
+											['Updated NFT project to adhere to Concordium blockchain interoperability standard CIS-1.']),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Optimizing the size of WASM modules.')
-												]))
+											['Took full responsibility for designing and implementing name service smart contract for Concordium ecosystem and ', 'provided a flexible solution within strict time schedule despite unclear and fluctuating requirements. During my work ', 'on the name service I was able to provide stable documentation of future API and binary serialization format extremely ', 'early to allow the start of integration process and reduce overall project developement time.']),
+											_List_fromArray(
+											['All the work had to be done in a rapidly changing environment, some work-in-progress solutions had to be reworked ', 'swiftly due to blockchain updates.']),
+											_List_fromArray(
+											['Aggressively optimized WASM binaries for size to provide extensive functionality despite strict blockchain limitations.'])
 										]))),
 								A5(
 								$author$project$Resume$historyEntry,
@@ -13005,37 +13039,25 @@ var $author$project$Resume$body = A2(
 								'Moscow, Russia',
 								$elm$core$Maybe$Just(
 									_List_fromArray(
-										['Rust', 'Substrate'])),
+										['Rust', 'WASM', 'Substrate'])),
 								A2(
-									$mdgriffith$elm_ui$Element$column,
+									$author$project$Resume$textColumnFromStrings,
+									$author$project$Resume$textStyle(
+										_List_fromArray(
+											[
+												$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+												$mdgriffith$elm_ui$Element$paddingEach(
+												{aY: 0, be: 10, bx: 0, bC: 0}),
+												$mdgriffith$elm_ui$Element$spacing(7)
+											])),
 									_List_fromArray(
 										[
-											$mdgriffith$elm_ui$Element$paddingEach(
-											{aY: 0, be: 20, bx: 0, bC: 0})
-										]),
-									_List_fromArray(
-										[
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Developing and maintaining Gear, a Substrate smart contract platform for Polkadot')
-												])),
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
+											['Provided library interface for smart contract development with safe and user-friendly abstractions over low-level functions ', 'exposed by smart contract platform.']),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Creating smart contract library API')
-												])),
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
+											['Greatly extended the functionality of smart contract test library and streamlined it\'s API.']),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Extending smart contract test library')
-												]))
+											['Implemented unit tests for existing functionality.'])
 										]))),
 								A5(
 								$author$project$Resume$historyEntry,
@@ -13046,42 +13068,27 @@ var $author$project$Resume$body = A2(
 									_List_fromArray(
 										['Rust', 'Tokio', 'GitLab CI'])),
 								A2(
-									$mdgriffith$elm_ui$Element$column,
+									$author$project$Resume$textColumnFromStrings,
+									$author$project$Resume$textStyle(
+										_List_fromArray(
+											[
+												$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+												$mdgriffith$elm_ui$Element$paddingEach(
+												{aY: 0, be: 10, bx: 0, bC: 0}),
+												$mdgriffith$elm_ui$Element$spacing(7)
+											])),
 									_List_fromArray(
 										[
-											$mdgriffith$elm_ui$Element$paddingEach(
-											{aY: 0, be: 20, bx: 0, bC: 0})
-										]),
-									_List_fromArray(
-										[
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Developing Exonum blockchain framework fork with private transactions and GOST cryptography')
-												])),
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
+											['Implemented the intellectual property tracking system on top of the Exonum blockchain node.']),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Translating business requirements to granular tasks')
-												])),
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
+											['Updated consensus algorithm to improve node connectivity.']),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Creating automation scripts and setting up GitLab CI')
-												])),
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
+											['Had to take over leading the project development urgenty, was able to adapt to new responsibilities quickly and made ', 'sure that good quality product was delivered in time.']),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Creating tasks, distributing them to team members, reviewing code and maintaining documentation')
-												]))
+											['Integrated cryptography library in accordance with certification requirements, provided necessary documentation for ', 'certification process.']),
+											_List_fromArray(
+											['Set up and optimized GitLab CI test and build process for Rust project.'])
 										]))),
 								A5(
 								$author$project$Resume$historyEntry,
@@ -13090,30 +13097,27 @@ var $author$project$Resume$body = A2(
 								'Nizhniy Novgorod, Russia',
 								$elm$core$Maybe$Just(
 									_List_fromArray(
-										['C/C++', 'Embedded', 'Networks', 'RTOS'])),
+										['C/C++', 'Embedded', 'Networking', 'Buildroot', 'RTOS'])),
 								A2(
-									$mdgriffith$elm_ui$Element$column,
+									$author$project$Resume$textColumnFromStrings,
+									$author$project$Resume$textStyle(
+										_List_fromArray(
+											[
+												$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+												$mdgriffith$elm_ui$Element$paddingEach(
+												{aY: 0, be: 10, bx: 0, bC: 0}),
+												$mdgriffith$elm_ui$Element$spacing(7)
+											])),
 									_List_fromArray(
 										[
-											$mdgriffith$elm_ui$Element$paddingEach(
-											{aY: 0, be: 20, bx: 0, bC: 0})
-										]),
-									_List_fromArray(
-										[
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Developing and maintaining Linux and RTOS embedded security systems')
-												])),
-											A2(
-											$mdgriffith$elm_ui$Element$paragraph,
-											$author$project$Resume$textStyle(_List_Nil),
+											['Develped and maintained fire alarm and security systems on embedded devices running Linux and TreadX RTOS.']),
 											_List_fromArray(
-												[
-													$author$project$ElementFix$text('Improving device network connection stability')
-												]))
+											['Improved device network connection stability.']),
+											_List_fromArray(
+											['Migrated legacy firmware to a device running RTOS.']),
+											_List_fromArray(
+											['Researched networking standards and protocols to work on network switch firmware.'])
 										])))
 							]))),
 					A2(
@@ -13157,13 +13161,7 @@ var $author$project$Resume$body = A2(
 			_List_fromArray(
 				[
 					$mdgriffith$elm_ui$Element$width(
-					A2(
-						$mdgriffith$elm_ui$Element$maximum,
-						250,
-						A2(
-							$mdgriffith$elm_ui$Element$minimum,
-							200,
-							$mdgriffith$elm_ui$Element$fillPortion(1)))),
+					$mdgriffith$elm_ui$Element$px($author$project$Resume$rcolWidth)),
 					$mdgriffith$elm_ui$Element$spacing(15),
 					$mdgriffith$elm_ui$Element$alignTop
 				]),
@@ -13202,9 +13200,15 @@ var $author$project$Resume$body = A2(
 										[$mdgriffith$elm_ui$Element$Font$bold])),
 								$author$project$ElementFix$text('Telegram')),
 								A2(
-								$mdgriffith$elm_ui$Element$el,
-								$author$project$Resume$extrasTextStyle(_List_Nil),
-								$author$project$ElementFix$text('@Anfid')),
+								$mdgriffith$elm_ui$Element$link,
+								_List_Nil,
+								{
+									s: A2(
+										$mdgriffith$elm_ui$Element$el,
+										$author$project$Resume$extrasTextStyle(_List_Nil),
+										$author$project$ElementFix$text('@Anfid')),
+									z: 'https://t.me/anfid'
+								}),
 								A2(
 								$mdgriffith$elm_ui$Element$el,
 								$author$project$Resume$extrasTextStyle(
@@ -13218,7 +13222,7 @@ var $author$project$Resume$body = A2(
 							]))),
 					A2(
 					$author$project$Resume$extraEntry,
-					'Date/Place of birth',
+					'Date of birth',
 					A2(
 						$mdgriffith$elm_ui$Element$paragraph,
 						$author$project$Resume$extrasTextStyle(
@@ -13228,7 +13232,21 @@ var $author$project$Resume$body = A2(
 								])),
 						_List_fromArray(
 							[
-								$author$project$ElementFix$text('22.07.1997, Russia')
+								$author$project$ElementFix$text('22.07.1997')
+							]))),
+					A2(
+					$author$project$Resume$extraEntry,
+					'Location',
+					A2(
+						$mdgriffith$elm_ui$Element$paragraph,
+						$author$project$Resume$extrasTextStyle(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$spacing(5)
+								])),
+						_List_fromArray(
+							[
+								$author$project$ElementFix$text('Tbilisi, Georgia')
 							]))),
 					A2(
 					$author$project$Resume$extraEntry,
@@ -13326,7 +13344,7 @@ var $author$project$Resume$body = A2(
 								A2(
 								$mdgriffith$elm_ui$Element$el,
 								_List_Nil,
-								$author$project$ElementFix$text('*NIX')),
+								$author$project$ElementFix$text('UNIX')),
 								A2(
 								$mdgriffith$elm_ui$Element$el,
 								_List_Nil,
@@ -13445,7 +13463,7 @@ var $author$project$Resume$contentView = A2(
 		[
 			$mdgriffith$elm_ui$Element$width(
 			A2($mdgriffith$elm_ui$Element$minimum, 520, $mdgriffith$elm_ui$Element$fill)),
-			$mdgriffith$elm_ui$Element$spacing(50),
+			$mdgriffith$elm_ui$Element$spacing(30),
 			$mdgriffith$elm_ui$Element$Background$color($author$project$Resume$bgColor)
 		]),
 	_List_fromArray(
@@ -13578,17 +13596,15 @@ var $author$project$Main$chapter = F4(
 					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
 					$mdgriffith$elm_ui$Element$spacing(30)
 				]),
-			_Utils_ap(
-				_List_fromArray(
-					[
-						A2(
-						$mdgriffith$elm_ui$Element$paragraph,
-						A3($author$project$Styles$heading, style, level, _List_Nil),
-						_List_fromArray(
-							[
-								$author$project$ElementFix$text(heading)
-							]))
-					]),
+			A2(
+				$elm$core$List$cons,
+				A2(
+					$mdgriffith$elm_ui$Element$paragraph,
+					A3($author$project$Styles$heading, style, level, _List_Nil),
+					_List_fromArray(
+						[
+							$author$project$ElementFix$text(heading)
+						])),
 				content));
 	});
 var $author$project$Styles$linkColor = function (style) {
@@ -13658,6 +13674,7 @@ var $author$project$Main$link = F3(
 				z: url
 			});
 	});
+var $mdgriffith$elm_ui$Internal$Flag$fontAlignment = $mdgriffith$elm_ui$Internal$Flag$flag(12);
 var $mdgriffith$elm_ui$Element$Font$alignLeft = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.c9);
 var $author$project$Styles$paragraph = F2(
 	function (style, attributes) {
@@ -13947,24 +13964,6 @@ var $author$project$Main$techStack = F2(
 								]));
 					},
 					stack)));
-	});
-var $mdgriffith$elm_ui$Internal$Model$AsTextColumn = 5;
-var $mdgriffith$elm_ui$Internal$Model$asTextColumn = 5;
-var $mdgriffith$elm_ui$Element$textColumn = F2(
-	function (attrs, children) {
-		return A4(
-			$mdgriffith$elm_ui$Internal$Model$element,
-			$mdgriffith$elm_ui$Internal$Model$asTextColumn,
-			$mdgriffith$elm_ui$Internal$Model$div,
-			A2(
-				$elm$core$List$cons,
-				$mdgriffith$elm_ui$Element$width(
-					A2(
-						$mdgriffith$elm_ui$Element$maximum,
-						750,
-						A2($mdgriffith$elm_ui$Element$minimum, 500, $mdgriffith$elm_ui$Element$fill))),
-				attrs),
-			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
 var $author$project$Main$projects = function (model) {
 	return A2(
@@ -14306,6 +14305,8 @@ var $author$project$Main$body = function (model) {
 				$mdgriffith$elm_ui$Element$column,
 				_List_fromArray(
 					[
+						$mdgriffith$elm_ui$Element$Background$color(
+						$author$project$Styles$bgColor(model.a)),
 						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 						$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
 						$mdgriffith$elm_ui$Element$spacing(30)
@@ -14320,6 +14321,8 @@ var $author$project$Main$body = function (model) {
 				$mdgriffith$elm_ui$Element$column,
 				_List_fromArray(
 					[
+						$mdgriffith$elm_ui$Element$Background$color(
+						$author$project$Styles$bgColor(model.a)),
 						$mdgriffith$elm_ui$Element$width(
 						A2($mdgriffith$elm_ui$Element$minimum, 570, $mdgriffith$elm_ui$Element$fill))
 					]),
@@ -14380,7 +14383,7 @@ var $author$project$Main$body = function (model) {
 								A2(
 									$mdgriffith$elm_ui$Element$minimum,
 									580,
-									A2($mdgriffith$elm_ui$Element$maximum, 810, $mdgriffith$elm_ui$Element$fill))),
+									A2($mdgriffith$elm_ui$Element$maximum, 840, $mdgriffith$elm_ui$Element$fill))),
 								$mdgriffith$elm_ui$Element$centerX,
 								A2($mdgriffith$elm_ui$Element$paddingXY, 5, 50)
 							]),
@@ -14447,6 +14450,8 @@ var $author$project$Main$body = function (model) {
 				$mdgriffith$elm_ui$Element$column,
 				_List_fromArray(
 					[
+						$mdgriffith$elm_ui$Element$Background$color(
+						$author$project$Styles$bgColor(model.a)),
 						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 						$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
 						$mdgriffith$elm_ui$Element$spacing(30)
@@ -14461,6 +14466,8 @@ var $author$project$Main$body = function (model) {
 				$mdgriffith$elm_ui$Element$column,
 				_List_fromArray(
 					[
+						$mdgriffith$elm_ui$Element$Background$color(
+						$author$project$Styles$bgColor(model.a)),
 						$mdgriffith$elm_ui$Element$spacing(70),
 						$mdgriffith$elm_ui$Element$centerX,
 						$mdgriffith$elm_ui$Element$centerY
@@ -14717,8 +14724,6 @@ var $author$project$Main$view = function (model) {
 				$mdgriffith$elm_ui$Element$layout,
 				_List_fromArray(
 					[
-						$mdgriffith$elm_ui$Element$Background$color(
-						$author$project$Styles$bgColor(model.a)),
 						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
 					]),
 				$author$project$Main$body(model))
