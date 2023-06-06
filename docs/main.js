@@ -13026,7 +13026,7 @@ var $author$project$Resume$body = A2(
 											_List_fromArray(
 											['Updated NFT project to adhere to Concordium blockchain interoperability standard CIS-1.']),
 											_List_fromArray(
-											['Took full responsibility for designing and implementing name service smart contract for Concordium ecosystem and ', 'provided a flexible solution within strict time schedule despite unclear and fluctuating requirements. During my work ', 'on the name service I was able to provide stable documentation of future API and binary serialization format extremely ', 'early to allow the start of integration process and reduce overall project developement time.']),
+											['Took full responsibility for designing and implementing name service smart contract for Concordium ecosystem and ', 'provided a flexible solution within strict time schedule despite unclear and fluctuating requirements. During my work ', 'on the name service I was able to provide stable documentation of future API and binary serialization format extremely ', 'early to allow the start of integration process and reduce overall project development time.']),
 											_List_fromArray(
 											['All the work had to be done in a rapidly changing environment, some work-in-progress solutions had to be reworked ', 'swiftly due to blockchain updates.']),
 											_List_fromArray(
@@ -13084,7 +13084,7 @@ var $author$project$Resume$body = A2(
 											_List_fromArray(
 											['Updated consensus algorithm to improve node connectivity.']),
 											_List_fromArray(
-											['Had to take over leading the project development urgenty, was able to adapt to new responsibilities quickly and made ', 'sure that good quality product was delivered in time.']),
+											['Had to take over leading the project development urgently, was able to adapt to new responsibilities quickly and made ', 'sure that good quality product was delivered in time.']),
 											_List_fromArray(
 											['Integrated cryptography library in accordance with certification requirements, provided necessary documentation for ', 'certification process.']),
 											_List_fromArray(
@@ -13111,7 +13111,7 @@ var $author$project$Resume$body = A2(
 									_List_fromArray(
 										[
 											_List_fromArray(
-											['Develped and maintained fire alarm and security systems on embedded devices running Linux and TreadX RTOS.']),
+											['Developed and maintained fire alarm and security systems on embedded devices running Linux and TreadX RTOS.']),
 											_List_fromArray(
 											['Improved device network connection stability.']),
 											_List_fromArray(

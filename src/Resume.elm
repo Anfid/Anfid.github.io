@@ -94,7 +94,7 @@ body =
                             , [ "Took full responsibility for designing and implementing name service smart contract for Concordium ecosystem and "
                               , "provided a flexible solution within strict time schedule despite unclear and fluctuating requirements. During my work "
                               , "on the name service I was able to provide stable documentation of future API and binary serialization format extremely "
-                              , "early to allow the start of integration process and reduce overall project developement time."
+                              , "early to allow the start of integration process and reduce overall project development time."
                               ]
                             , [ "All the work had to be done in a rapidly changing environment, some work-in-progress solutions had to be reworked "
                               , "swiftly due to blockchain updates."
@@ -128,7 +128,7 @@ body =
                               ]
                             , [ "Updated consensus algorithm to improve node connectivity."
                               ]
-                            , [ "Had to take over leading the project development urgenty, was able to adapt to new responsibilities quickly and made "
+                            , [ "Had to take over leading the project development urgently, was able to adapt to new responsibilities quickly and made "
                               , "sure that good quality product was delivered in time."
                               ]
                             , [ "Integrated cryptography library in accordance with certification requirements, provided necessary documentation for "
@@ -144,7 +144,7 @@ body =
                         (Just [ "C/C++", "Embedded", "Networking", "Buildroot", "RTOS" ])
                       <|
                         textColumnFromStrings (textStyle [ Element.width fill, Element.paddingEach { left = 10, right = 0, top = 0, bottom = 0 }, Element.spacing 7 ])
-                            [ [ "Develped and maintained fire alarm and security systems on embedded devices running Linux and TreadX RTOS."
+                            [ [ "Developed and maintained fire alarm and security systems on embedded devices running Linux and TreadX RTOS."
                               ]
                             , [ "Improved device network connection stability."
                               ]
