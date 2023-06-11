@@ -28,12 +28,12 @@ contentView =
 
 heading : Element Msg
 heading =
-    row [ Element.spacing 10, Element.width <| Element.minimum 470 <| fill ]
+    row [ Element.spacing 20, Element.width <| Element.minimum 470 <| fill ]
         [ Element.image
             [ Element.width <| px 100, Element.height <| px 100, Border.rounded 20, Element.clip ]
             { src = "/assets/resume_photo.png", description = "" }
-        , column []
-            [ el [ Element.padding 5, Font.color fgColor, Font.size 40, Font.family [ Font.serif ] ] <|
+        , column [ Element.spacing 5 ]
+            [ el [ Font.color fgColor, Font.size 40, Font.family [ Font.serif ] ] <|
                 text "Mikhail Pogretskiy"
             , el (textStyle []) <| text "Rust developer"
             ]
@@ -63,10 +63,10 @@ textColumnFromStrings attributes paragraphs =
 body : Element Msg
 body =
     row [ Element.spacing 20, Element.width <| Element.minimum (lcolMinWidth + rcolWidth + 20) <| Element.maximum (lcolMaxWidth + rcolWidth + 20) <| fill ]
-        [ column [ Element.width <| Element.minimum lcolMinWidth <| Element.maximum lcolMaxWidth fill, Element.spacing 25, alignTop ]
+        [ column [ Element.width <| Element.minimum lcolMinWidth <| Element.maximum lcolMaxWidth fill, Element.spacing 35, alignTop ]
             [ bodyPart "About me" <|
                 textColumnFromStrings (textStyle [ Element.width fill, Element.spacing 10 ])
-                    [ [ "I'm a Rust engineer experienced in Rust, WASM, UNIX and blockchain. My C/C++ embedded background provided me "
+                    [ [ "I'm a Rust engineer experienced in Rust, WebAssembly, UNIX and blockchain. My C/C++ embedded background provided me "
                       , "with deep understanding of how software works on the lowest level and how it interacts with hardware. During "
                       , "software development my main priority is it's reliability and security. I put in extra effort to make sure "
                       , "that it adheres to best practices and applicable open standards."
@@ -81,14 +81,14 @@ body =
                       ]
                     ]
             , bodyPart "Employment history" <|
-                column [ Element.width fill, Element.spacing 10 ]
+                column [ Element.width fill, Element.spacing 20 ]
                     [ historyEntry
                         "Smart contract developer (Rust) at Bictory"
                         "January 2022 - October 2022"
                         "Remote"
-                        (Just [ "Rust", "Smart Contracts", "WASM", "Concordium" ])
+                        (Just [ "Rust", "Smart Contracts", "WebAssembly", "Concordium", "API design" ])
                       <|
-                        textColumnFromStrings (textStyle [ Element.width fill, Element.paddingEach { left = 10, right = 0, top = 0, bottom = 0 }, Element.spacing 7 ])
+                        textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ])
                             [ [ "Updated NFT project to adhere to Concordium blockchain interoperability standard CIS-1."
                               ]
                             , [ "Took full responsibility for designing and implementing name service smart contract for Concordium ecosystem and "
@@ -99,16 +99,16 @@ body =
                             , [ "All the work had to be done in a rapidly changing environment, some work-in-progress solutions had to be reworked "
                               , "swiftly due to blockchain updates."
                               ]
-                            , [ "Aggressively optimized WASM binaries for size to provide extensive functionality despite strict blockchain limitations."
+                            , [ "Aggressively optimized WebAssembly binaries for size to provide extensive functionality despite strict blockchain limitations."
                               ]
                             ]
                     , historyEntry
                         "Blockchain developer (Rust) at Gear"
                         "August 2021 - December 2021"
                         "Moscow, Russia"
-                        (Just [ "Rust", "WASM", "Substrate" ])
+                        (Just [ "Rust", "WebAssembly", "Substrate", "API design" ])
                       <|
-                        textColumnFromStrings (textStyle [ Element.width fill, Element.paddingEach { left = 10, right = 0, top = 0, bottom = 0 }, Element.spacing 7 ])
+                        textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ])
                             [ [ "Provided library interface for smart contract development with safe and user-friendly abstractions over low-level functions "
                               , "exposed by smart contract platform."
                               ]
@@ -121,9 +121,9 @@ body =
                         "Blockchain developer (Rust) at XDSoft"
                         "September 2019 - March 2021"
                         "Novosibirsk, Russia"
-                        (Just [ "Rust", "Tokio", "GitLab CI" ])
+                        (Just [ "Rust", "Tokio", "GitLab CI", "Exonum" ])
                       <|
-                        textColumnFromStrings (textStyle [ Element.width fill, Element.paddingEach { left = 10, right = 0, top = 0, bottom = 0 }, Element.spacing 7 ])
+                        textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ])
                             [ [ "Implemented the intellectual property tracking system on top of the Exonum blockchain node."
                               ]
                             , [ "Updated consensus algorithm to improve node connectivity."
@@ -143,7 +143,7 @@ body =
                         "Nizhniy Novgorod, Russia"
                         (Just [ "C/C++", "Embedded", "Networking", "Buildroot", "RTOS" ])
                       <|
-                        textColumnFromStrings (textStyle [ Element.width fill, Element.paddingEach { left = 10, right = 0, top = 0, bottom = 0 }, Element.spacing 7 ])
+                        textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ])
                             [ [ "Developed and maintained fire alarm and security systems on embedded devices running Linux and TreadX RTOS."
                               ]
                             , [ "Improved device network connection stability."
@@ -163,74 +163,82 @@ body =
                         Nothing
                       <|
                         column
-                            [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 } ]
+                            [ paddingLeft 20 ]
                             [ paragraph (textStyle [])
                                 [ text "" ]
                             ]
                     ]
             ]
-        , column [ Element.width <| px rcolWidth, Element.spacing 15, alignTop ]
-            [ extraEntry "Contacts" <|
-                Element.column
-                    []
-                    [ el (extrasTextStyle [ Font.bold ]) <| text "E-mail"
-                    , Element.link []
-                        { url = "mailto:mikhail.pogretskiy@gmail.com"
-                        , label = el (extrasTextStyle [ Element.alignRight ]) <| text "mikhail.pogretskiy@gmail.com"
-                        }
-                    , el (extrasTextStyle [ Font.bold ]) <| text "Telegram"
-                    , Element.link []
-                        { url = "https://t.me/anfid"
-                        , label = el (extrasTextStyle []) <| text "@Anfid"
-                        }
-                    , el (extrasTextStyle [ Font.bold ]) <| text "Mobile"
-                    , el (extrasTextStyle []) <| text "+995 (595) 46 56 29"
+        , column [ Element.width <| px rcolWidth, Element.spacing 30, alignTop ]
+            [ extraEntry "Skills" <|
+                skillColumns
+                    [ "Rust"
+                    , "WebAssembly"
+                    , "Substrate"
+                    , "Smart Contracts"
+                    , "Blockchain"
+                    , "Linux"
+                    , "UNIX"
                     ]
-            , extraEntry "Date of birth" <|
-                paragraph
-                    (extrasTextStyle [ Element.spacing 5 ])
-                    [ text "22.07.1997" ]
+                    [ "API design"
+                    , "Git"
+                    , "GitLab CI"
+                    , "Tokio"
+                    , "x86 ASM"
+                    , "Elm"
+                    , "Lua"
+                    , "C"
+                    ]
+            , extraEntry "Contacts" <|
+                Element.column
+                    [ Element.spacing 9, paddingLeft 5 ]
+                    [ Element.column
+                        [ Element.spacing 3 ]
+                        [ el (extrasTextStyle [ Font.bold ]) <| text "E-mail"
+                        , Element.link []
+                            { url = "mailto:mikhail.pogretskiy@gmail.com"
+                            , label = el (extrasTextStyle [ Element.alignRight ]) <| text "mikhail.pogretskiy@gmail.com"
+                            }
+                        ]
+                    , Element.column
+                        [ Element.spacing 3 ]
+                        [ el (extrasTextStyle [ Font.bold ]) <| text "Telegram"
+                        , Element.link []
+                            { url = "https://t.me/anfid"
+                            , label = el (extrasTextStyle []) <| text "@Anfid"
+                            }
+                        ]
+                    , Element.column
+                        [ Element.spacing 3 ]
+                        [ el (extrasTextStyle [ Font.bold ]) <| text "Mobile"
+                        , el (extrasTextStyle []) <| text "+995 (595) 46 56 29"
+                        ]
+                    ]
             , extraEntry "Location" <|
                 paragraph
-                    (extrasTextStyle [ Element.spacing 5 ])
+                    (extrasTextStyle [ paddingLeft 5 ])
                     [ text "Tbilisi, Georgia" ]
             , extraEntry "Website" <|
                 Element.link
-                    (extrasTextStyle [ Element.spacing 5 ])
-                    { url = "https://Anfid.github.io/"
-                    , label = el (extrasTextStyle [ Element.alignRight ]) <| text "Anfid.github.io"
+                    (extrasTextStyle [])
+                    { url = "https://anfid.github.io/"
+                    , label = el (extrasTextStyle [ paddingLeft 5 ]) <| text "anfid.github.io"
                     }
             , extraEntry "Links" <|
                 Element.link
-                    (extrasTextStyle [ Element.spacing 5 ])
+                    (extrasTextStyle [])
                     { url = "https://github.com/Anfid"
                     , label =
-                        row []
+                        row [ paddingLeft 5, Element.spacing 5 ]
                             [ Element.image [ Element.width <| px 15 ] { src = "/assets/GitHub-Mark-32px.png", description = "GitHub logo" }
-                            , el (extrasTextStyle [ Element.alignRight ]) <| text "Anfid"
+                            , el (extrasTextStyle []) <| text "Anfid"
                             ]
                     }
-            , extraEntry "Programming languages" <|
-                column
-                    (extrasTextStyle [ Element.spacing 5 ])
-                    [ el [] <| text "Rust"
-                    , el [] <| text "Elm"
-                    , el [] <| text "Lua"
-                    , el [] <| text "C"
-                    ]
-            , extraEntry "Skills" <|
-                column
-                    (extrasTextStyle [ Element.spacing 5 ])
-                    [ el [] <| text "UNIX"
-                    , el [] <| text "Git"
-                    , el [] <| text "WASM"
-                    , el [] <| text "x86 ASM"
-                    ]
             , extraEntry "Languages" <|
                 column
-                    (extrasTextStyle [ Element.width fill, Element.spacing 5 ])
-                    [ row [ Element.width fill ] [ text "Russian", el [ Element.alignRight, Font.color fgFadedColor ] <| text "Native" ]
-                    , row [ Element.width fill ] [ text "English", el [ Element.alignRight, Font.color fgFadedColor ] <| text "Fluent" ]
+                    (extrasTextStyle [ Element.width fill, Element.spacing 5, paddingLeft 5 ])
+                    [ row [ Element.width fill ] [ text "English", el [ Element.alignRight, Font.color fgFadedColor ] <| text "Fluent" ]
+                    , row [ Element.width fill ] [ text "Russian", el [ Element.alignRight, Font.color fgFadedColor ] <| text "Native" ]
                     ]
             ]
         ]
@@ -238,9 +246,9 @@ body =
 
 bodyPart : String -> Element Msg -> Element Msg
 bodyPart title content =
-    column [ Element.width fill ]
+    column [ Element.width fill, Element.spacing 5 ]
         [ paragraph
-            [ Element.padding 5, Font.color fgColor, Font.size 20, Font.family [ Font.serif ], Font.bold ]
+            [ Font.color fgColor, Font.size 20, Font.family [ Font.serif ], Font.bold ]
             [ text title ]
         , content
         ]
@@ -248,9 +256,9 @@ bodyPart title content =
 
 historyEntry : String -> String -> String -> Maybe (List String) -> Element Msg -> Element Msg
 historyEntry title dates location skills content =
-    column [ Element.paddingEach { left = 20, right = 0, top = 0, bottom = 0 }, Element.width fill, Element.htmlAttribute <| Html.Attributes.style "break-inside" "avoid" ]
+    column [ paddingLeft 10, Element.spacing 5, Element.width fill, Element.htmlAttribute <| Html.Attributes.style "break-inside" "avoid" ]
         [ paragraph
-            [ Element.padding 5, Font.color fgColor, Font.size 17, Font.family [ Font.serif ], Font.bold ]
+            [ Font.color fgColor, Font.size 17, Font.family [ Font.serif ], Font.bold ]
             [ text title ]
         , wrappedRow [ Element.width fill ]
             [ text dates |> el (textStyle [ Font.size 13, Font.color fgFadedColor, Element.alignLeft ])
@@ -258,9 +266,10 @@ historyEntry title dates location skills content =
             ]
         , case skills of
             Just skillList ->
-                row
-                    [ Element.padding 5, Element.spacing 5, Font.color fgColor, Font.size 13, Font.family [ Font.serif ], Font.bold, Element.alignLeft ]
-                    (List.map (\skill -> el [ Element.padding 5, Background.color <| rgb255 235 235 235, Border.rounded 5 ] (text skill)) skillList)
+                wrappedRow
+                    -- Padding = 3 fixes a stupid weird page print bug in chromium. No clue why. Do not remove
+                    [ Element.padding 3, Element.spacing 5, Font.color fgColor, Font.size 13, Font.family [ Font.serif ], Font.bold, Element.alignLeft ]
+                    (List.map (\skill -> el skillBadge (text skill)) skillList)
 
             Nothing ->
                 Element.none
@@ -270,9 +279,37 @@ historyEntry title dates location skills content =
 
 extraEntry : String -> Element Msg -> Element Msg
 extraEntry title content =
-    column [ Element.width fill ]
-        [ paragraph [ Element.padding 5, Font.bold, Font.color fgColor, Font.size 17, Font.family [ Font.serif ] ] [ text title ]
-        , el [ Element.width fill, Element.paddingEach { left = 10, right = 0, top = 0, bottom = 0 } ] content
+    column [ Element.spacing 7, Element.width fill ]
+        [ paragraph [ Font.bold, Font.color fgColor, Font.size 17, Font.family [ Font.serif ] ] [ text title ]
+        , el [ Element.width fill ] content
+        ]
+
+
+skillColumns : List String -> List String -> Element Msg
+skillColumns relevant secondary =
+    let
+        totalLength =
+            List.length relevant + List.length secondary
+
+        leftLength =
+            totalLength // 2 + modBy 2 totalLength
+
+        relevantFormatted =
+            List.map (el (Font.bold :: skillBadge) << text) relevant
+
+        secondaryFormatted =
+            List.map (el skillBadge << text) secondary
+
+        joined =
+            List.append relevantFormatted secondaryFormatted
+    in
+    row (extrasTextStyle [ Element.width fill ]) <|
+        [ column [ Element.alignTop, Element.alignLeft, Element.spacing 5 ] <|
+            List.take leftLength
+                joined
+        , column [ Element.alignTop, Element.alignRight, Element.spacing 5 ] <|
+            List.drop leftLength
+                joined
         ]
 
 
@@ -283,8 +320,7 @@ extraEntry title content =
 textStyle : List (Element.Attribute msg) -> List (Element.Attribute msg)
 textStyle =
     (++)
-        [ Element.padding 5
-        , Font.color fgColor
+        [ Font.color fgColor
         , Font.size 16
         , Font.family [ Font.serif ]
         ]
@@ -293,11 +329,20 @@ textStyle =
 extrasTextStyle : List (Element.Attribute msg) -> List (Element.Attribute msg)
 extrasTextStyle =
     (++)
-        [ Element.padding 5
-        , Font.color fgColor
+        [ Font.color fgColor
         , Font.size 13
         , Font.family [ Font.serif ]
         ]
+
+
+paddingLeft : Int -> Element.Attribute msg
+paddingLeft pad =
+    Element.paddingEach { left = pad, top = 0, right = 0, bottom = 0 }
+
+
+skillBadge : List (Element.Attribute msg)
+skillBadge =
+    [ Element.padding 4, Background.color <| rgb255 235 235 235, Border.rounded 5 ]
 
 
 
