@@ -1,12 +1,15 @@
 module Resume exposing (Msg, contentView, view)
 
 import Browser
+import Date exposing (Date)
 import Element exposing (Color, Element, alignTop, column, el, fill, paragraph, px, rgb255, row, textColumn, wrappedRow)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import ElementFix exposing (text)
+import Experience exposing (EducationEntry, EmploymentEntry)
 import Html.Attributes
+import Time exposing (Month(..))
 
 
 type alias Msg =
@@ -30,7 +33,7 @@ heading : Element Msg
 heading =
     row [ Element.spacing 20, Element.width <| Element.minimum 470 <| fill ]
         [ Element.image
-            [ Element.width <| px 100, Element.height <| px 100, Border.rounded 20, Element.clip ]
+            [ Element.width <| px 100, Element.height <| px 100, Border.rounded 20, Element.clip, Background.image "/assets/resume_photo_smol.jpeg" ]
             { src = "/assets/resume_photo.png", description = "" }
         , column [ Element.spacing 5 ]
             [ el [ Font.color fgColor, Font.size 40, Font.family [ Font.serif ] ] <|
@@ -65,109 +68,17 @@ body =
     row [ Element.spacing 20, Element.width <| Element.minimum (lcolMinWidth + rcolWidth + 20) <| Element.maximum (lcolMaxWidth + rcolWidth + 20) <| fill ]
         [ column [ Element.width <| Element.minimum lcolMinWidth <| Element.maximum lcolMaxWidth fill, Element.spacing 35, alignTop ]
             [ bodyPart "About me" <|
-                textColumnFromStrings (textStyle [ Element.width fill, Element.spacing 10 ])
-                    [ [ "I'm a Rust engineer experienced in Rust, WebAssembly, UNIX and blockchain. My C/C++ embedded background provided me "
-                      , "with deep understanding of how software works on the lowest level and how it interacts with hardware. During "
-                      , "software development my main priority is it's reliability and security. I put in extra effort to make sure "
-                      , "that it adheres to best practices and applicable open standards."
-                      ]
-                    , [ "I have significant experience in organizing work on a project and prioritizing key features and tasks. I "
-                      , "proactively engage in discussions of what project or feature aims to achieve and what is required to "
-                      , "implement it. This allows me to identify potential difficult points early on, provide swift feedback and "
-                      , "set realistic goals or come up with a good compromise if resources are limited."
-                      ]
-                    , [ "And of course I always remain open to learning from other people or from my own experiences. I feel like this "
-                      , "is a must for being a good developer in a rapidly-changing software development world."
-                      ]
-                    ]
+                textColumnFromStrings (textStyle [ Element.width fill, Element.spacing 10 ]) Experience.about
             , bodyPart "Employment history" <|
-                column [ Element.width fill, Element.spacing 20 ]
-                    [ historyEntry
-                        "Smart contract developer (Rust) at Bictory"
-                        "January 2022 - October 2022"
-                        "Remote"
-                        (Just [ "Rust", "Smart Contracts", "WebAssembly", "Concordium", "API design" ])
-                      <|
-                        textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ])
-                            [ [ "Updated NFT project to adhere to Concordium blockchain interoperability standard CIS-1."
-                              ]
-                            , [ "Took full responsibility for designing and implementing name service smart contract for Concordium ecosystem and "
-                              , "provided a flexible solution within strict time schedule despite unclear and fluctuating requirements. During my work "
-                              , "on the name service I was able to provide stable documentation of future API and binary serialization format extremely "
-                              , "early to allow the start of integration process and reduce overall project development time."
-                              ]
-                            , [ "All the work had to be done in a rapidly changing environment, some work-in-progress solutions had to be reworked "
-                              , "swiftly due to blockchain updates."
-                              ]
-                            , [ "Aggressively optimized WebAssembly binaries for size to provide extensive functionality despite strict blockchain limitations."
-                              ]
-                            ]
-                    , historyEntry
-                        "Blockchain developer (Rust) at Gear"
-                        "August 2021 - December 2021"
-                        "Moscow, Russia"
-                        (Just [ "Rust", "WebAssembly", "Substrate", "API design" ])
-                      <|
-                        textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ])
-                            [ [ "Provided library interface for smart contract development with safe and user-friendly abstractions over low-level functions "
-                              , "exposed by smart contract platform."
-                              ]
-                            , [ "Greatly extended the functionality of smart contract test library and streamlined it's API."
-                              ]
-                            , [ "Implemented unit tests for existing functionality."
-                              ]
-                            ]
-                    , historyEntry
-                        "Blockchain developer (Rust) at XDSoft"
-                        "September 2019 - March 2021"
-                        "Novosibirsk, Russia"
-                        (Just [ "Rust", "Tokio", "GitLab CI", "Exonum" ])
-                      <|
-                        textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ])
-                            [ [ "Implemented the intellectual property tracking system on top of the Exonum blockchain node."
-                              ]
-                            , [ "Updated consensus algorithm to improve node connectivity."
-                              ]
-                            , [ "Had to take over leading the project development urgently, was able to adapt to new responsibilities quickly and made "
-                              , "sure that good quality product was delivered in time."
-                              ]
-                            , [ "Integrated cryptography library in accordance with certification requirements, provided necessary documentation for "
-                              , "certification process."
-                              ]
-                            , [ "Set up and optimized GitLab CI test and build process for Rust project."
-                              ]
-                            ]
-                    , historyEntry
-                        "Embedded developer (C/C++) at MERA"
-                        "March 2018 - September 2019"
-                        "Nizhniy Novgorod, Russia"
-                        (Just [ "C/C++", "Embedded", "Networking", "Buildroot", "RTOS" ])
-                      <|
-                        textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ])
-                            [ [ "Developed and maintained fire alarm and security systems on embedded devices running Linux and TreadX RTOS."
-                              ]
-                            , [ "Improved device network connection stability."
-                              ]
-                            , [ "Migrated legacy firmware to a device running RTOS."
-                              ]
-                            , [ "Researched networking standards and protocols to work on network switch firmware."
-                              ]
-                            ]
-                    ]
+                column [ Element.width fill, Element.spacing 20 ] <|
+                    List.map employmentToHistory <|
+                        List.reverse <|
+                            List.sortBy (\e -> Date.toRataDie e.start) Experience.employmentList
             , bodyPart "Education" <|
-                column [ Element.width fill ]
-                    [ historyEntry
-                        "Nizhniy Novgorod Technical College"
-                        "October 2013 - October 2017"
-                        "Nizhniy Novgorod, Russia"
-                        Nothing
-                      <|
-                        column
-                            [ paddingLeft 20 ]
-                            [ paragraph (textStyle [])
-                                [ text "" ]
-                            ]
-                    ]
+                column [ Element.width fill, Element.spacing 20 ] <|
+                    List.map educationToHistory <|
+                        List.reverse <|
+                            List.sortBy (\e -> Date.toRataDie e.start) Experience.educationList
             ]
         , column [ Element.width <| px rcolWidth, Element.spacing 30, alignTop ]
             [ extraEntry "Skills" <|
@@ -186,6 +97,7 @@ body =
                     , "Tokio"
                     , "x86 ASM"
                     , "Elm"
+                    , "Golang"
                     , "Lua"
                     , "C"
                     ]
@@ -239,6 +151,7 @@ body =
                     (extrasTextStyle [ Element.width fill, Element.spacing 5, paddingLeft 5 ])
                     [ row [ Element.width fill ] [ text "English", el [ Element.alignRight, Font.color fgFadedColor ] <| text "Fluent" ]
                     , row [ Element.width fill ] [ text "Russian", el [ Element.alignRight, Font.color fgFadedColor ] <| text "Native" ]
+                    , row [ Element.width fill ] [ text "Spanish", el [ Element.alignRight, Font.color fgFadedColor ] <| text "Basic" ]
                     ]
             ]
         ]
@@ -254,7 +167,7 @@ bodyPart title content =
         ]
 
 
-historyEntry : String -> String -> String -> Maybe (List String) -> Element Msg -> Element Msg
+historyEntry : String -> String -> String -> List String -> Element Msg -> Element Msg
 historyEntry title dates location skills content =
     column [ paddingLeft 10, Element.spacing 5, Element.width fill, Element.htmlAttribute <| Html.Attributes.style "break-inside" "avoid" ]
         [ paragraph
@@ -264,17 +177,49 @@ historyEntry title dates location skills content =
             [ text dates |> el (textStyle [ Font.size 13, Font.color fgFadedColor, Element.alignLeft ])
             , text location |> el (textStyle [ Font.size 13, Font.color fgFadedColor, Element.alignRight ])
             ]
-        , case skills of
-            Just skillList ->
-                wrappedRow
-                    -- Padding = 3 fixes a stupid weird page print bug in chromium. No clue why. Do not remove
-                    [ Element.padding 3, Element.spacing 5, Font.color fgColor, Font.size 13, Font.family [ Font.serif ], Font.bold, Element.alignLeft ]
-                    (List.map (\skill -> el skillBadge (text skill)) skillList)
+        , if List.isEmpty skills then
+            Element.none
 
-            Nothing ->
-                Element.none
+          else
+            wrappedRow
+                -- Padding = 3 fixes a stupid weird page print bug in chromium. No clue why. Do not remove
+                [ Element.padding 3, Element.spacing 5, Font.color fgColor, Font.size 13, Font.family [ Font.serif ], Font.bold, Element.alignLeft ]
+                (List.map (\skill -> el skillBadge (text skill)) skills)
         , content
         ]
+
+
+employmentToHistory : EmploymentEntry -> Element Msg
+employmentToHistory entry =
+    historyEntry
+        (entry.role ++ " at " ++ entry.company)
+        (formatDateRange entry.start entry.end)
+        entry.location
+        entry.skills
+        (textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ]) entry.description)
+
+
+educationToHistory : EducationEntry -> Element Msg
+educationToHistory entry =
+    historyEntry
+        entry.institution
+        (formatDateRange entry.start entry.end)
+        entry.location
+        []
+        Element.none
+
+
+formatDateRange : Date -> Maybe Date -> String
+formatDateRange start maybeEnd =
+    Date.format "MMMM Y" start
+        ++ " - "
+        ++ (case maybeEnd of
+                Just end ->
+                    Date.format "MMMM Y" end
+
+                Nothing ->
+                    "Present"
+           )
 
 
 extraEntry : String -> Element Msg -> Element Msg
