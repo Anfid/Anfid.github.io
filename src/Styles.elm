@@ -1,15 +1,26 @@
-module Styles exposing (Style(..), bar, bgColor, button, heading, link, paragraph, sansSerif, smallButton)
+module Styles exposing (Style(..), bar, bgColor, button, flip, heading, icon, link, paragraph, sansSerif, smallButton)
 
 import Element exposing (Color, fill, rgb255)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Region as Region
+import Html.Attributes
 
 
 type Style
     = Dark
     | Light
+
+
+flip : Style -> Style
+flip style =
+    case style of
+        Dark ->
+            Light
+
+        Light ->
+            Dark
 
 
 
@@ -107,6 +118,16 @@ smallButton style attributes =
     , Element.focused [ Background.color <| smallButtonHoverColor style ]
     ]
         ++ attributes
+
+
+icon : Style -> List (Element.Attribute msg) -> List (Element.Attribute msg)
+icon style attributes =
+    case style of
+        Dark ->
+            (Element.htmlAttribute <| Html.Attributes.style "filter" "invert(90%)") :: attributes
+
+        Light ->
+            attributes
 
 
 

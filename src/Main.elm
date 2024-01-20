@@ -1,6 +1,7 @@
 module Main exposing (main)
 
 import Browser
+import Browser.Events
 import Browser.Navigation as Navigation
 import Element exposing (Element, column, fill, px)
 import Element.Background as Background
@@ -10,8 +11,13 @@ import Element.Input as Input
 import ElementFix exposing (text)
 import Html.Attributes
 import Ports
+import Process
 import Resume
+import Simple.Animation as Animation
+import Simple.Animation.Animated as Animated
+import Simple.Animation.Property as AnimationProperty
 import Styles exposing (Style)
+import Task
 import Url exposing (Url)
 import Url.Parser as Parser exposing ((</>), Parser)
 
@@ -34,7 +40,7 @@ main =
 
 init : Dimensions -> Url -> Navigation.Key -> ( Model, Cmd Msg )
 init keys url key =
-    gotoUrl url <| Model key keys url Styles.Dark Index
+    gotoUrl url <| Model key keys url Styles.Dark Index 0
 
 
 
@@ -47,6 +53,7 @@ type alias Model =
     , url : Url
     , style : Style
     , page : Page
+    , styleAnimations : Int
     }
 
 
@@ -74,6 +81,7 @@ type Msg
     | Resize Int Int
     | Print
     | SwitchTheme
+    | SwitchThemeDone Int
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -90,27 +98,40 @@ update msg model =
         UrlChanged url ->
             gotoUrl url model
 
-        SwitchTheme ->
-            let
-                newStyle =
-                    case model.style of
-                        Styles.Light ->
-                            Styles.Dark
-
-                        Styles.Dark ->
-                            Styles.Light
-            in
-            ( { model | style = newStyle }, Cmd.none )
+        Resize w h ->
+            ( { model | dimensions = { width = w, height = h } }, Cmd.none )
 
         Print ->
             ( model, Ports.printPage )
 
-        _ ->
-            ( model, Cmd.none )
+        SwitchTheme ->
+            ( { model | styleAnimations = model.styleAnimations + 1 }
+            , Process.sleep (toFloat styleSwitchDuration) |> Task.andThen (\_ -> Task.succeed <| model.styleAnimations + 1) |> Task.perform SwitchThemeDone
+            )
+
+        SwitchThemeDone count ->
+            if count == model.styleAnimations then
+                let
+                    style =
+                        if remainderBy 2 count == 0 then
+                            model.style
+
+                        else
+                            Styles.flip model.style
+                in
+                ( { model | styleAnimations = 0, style = style }, Cmd.none )
+
+            else
+                ( model, Cmd.none )
 
 
 
 -- VIEW
+
+
+styleSwitchDuration : Int
+styleSwitchDuration =
+    500
 
 
 view : Model -> Browser.Document Msg
@@ -119,22 +140,13 @@ view model =
     , body =
         [ Element.layout
             [ Element.width fill ]
-            (body model)
+            (styleableView body model)
         ]
     }
 
 
 body : Model -> Element Msg
 body model =
-    let
-        iconStyle =
-            case model.style of
-                Styles.Dark ->
-                    [ Element.htmlAttribute <| Html.Attributes.style "filter" "invert(90%)" ]
-
-                Styles.Light ->
-                    []
-    in
     case model.page of
         Index ->
             column [ Background.color <| Styles.bgColor model.style, Element.width fill, Element.height fill, Element.spacing 30 ]
@@ -147,7 +159,7 @@ body model =
                 [ bar model
                     [ Element.downloadAs (Styles.button model.style [])
                         { label =
-                            Element.image ([ Element.centerX, Element.centerY, Element.height <| px 20, Element.width <| px 20 ] ++ iconStyle)
+                            Element.image (Styles.icon model.style [ Element.centerX, Element.centerY, Element.height <| px 20, Element.width <| px 20 ])
                                 { src = "/assets/download.png", description = "Download" }
                         , filename = "Mikhail-Pogretskiy.pdf"
                         , url = "/assets/resume.pdf"
@@ -155,7 +167,7 @@ body model =
                     , Element.link (Styles.button model.style [])
                         { url = "/resume/export"
                         , label =
-                            Element.image ([ Element.centerX, Element.centerY, Element.height <| px 20, Element.width <| px 20 ] ++ iconStyle)
+                            Element.image (Styles.icon model.style [ Element.centerX, Element.centerY, Element.height <| px 20, Element.width <| px 20 ])
                                 { src = "/assets/print.png", description = "Print" }
                         }
                     ]
@@ -180,10 +192,8 @@ body model =
                         { onPress = Just Print
                         , label =
                             Element.el
-                                [ Element.paddingEach { left = 25, right = 10, top = 5, bottom = 15 }
-                                , Font.size 25
-                                ]
-                                (Element.image ([ Element.centerX, Element.centerY, Element.height <| px 32, Element.width <| px 32 ] ++ iconStyle)
+                                [ Element.paddingEach { left = 25, right = 10, top = 5, bottom = 15 }, Font.size 25 ]
+                                (Element.image (Styles.icon model.style [ Element.centerX, Element.centerY, Element.height <| px 32, Element.width <| px 32 ])
                                     { src = "/assets/print.png", description = "Print" }
                                 )
                         }
@@ -211,6 +221,55 @@ body model =
                 , Element.el (Styles.sansSerif model.style 50 [ Element.centerX ]) <| text "Not Found"
                 , Element.link (Styles.button model.style [ Element.centerX ]) { label = Element.paragraph [] [ text "Let's go home?" ], url = "/" }
                 ]
+
+
+styleableView : (Model -> Element Msg) -> Model -> Element Msg
+styleableView fView model =
+    Element.el
+        ([ Element.width fill, Element.height fill ] ++ styleStack fView (model.dimensions.width - 20) 20 model.styleAnimations { model | style = Styles.flip model.style })
+    <|
+        fView model
+
+
+styleStack : (Model -> Element Msg) -> Int -> Int -> Int -> Model -> List (Element.Attribute Msg)
+styleStack fView x y count model =
+    if count > 0 then
+        (Element.inFront <|
+            Animated.ui
+                { behindContent = Element.behindContent
+                , htmlAttribute = Element.htmlAttribute
+                , html = Element.html
+                }
+                Element.el
+                (Animation.fromTo
+                    { duration = styleSwitchDuration, options = [ Animation.easeInQuad ] }
+                    [ AnimationProperty.property "clip-path"
+                        ("circle(0px at "
+                            ++ String.fromInt x
+                            ++ "px "
+                            ++ String.fromInt y
+                            ++ "px)"
+                        )
+                    ]
+                    [ AnimationProperty.property "clip-path"
+                        ("circle("
+                            ++ (String.fromInt <| (*) 2 <| max model.dimensions.height model.dimensions.width)
+                            ++ "px at "
+                            ++ String.fromInt x
+                            ++ "px "
+                            ++ String.fromInt y
+                            ++ "px)"
+                        )
+                    ]
+                )
+                [ Element.width fill, Element.height fill ]
+            <|
+                fView model
+        )
+            :: styleStack fView x y (count - 1) { model | style = Styles.flip model.style }
+
+    else
+        []
 
 
 
@@ -511,4 +570,4 @@ gotoUrl url model =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Sub.none
+    Browser.Events.onResize Resize
