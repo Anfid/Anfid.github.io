@@ -14688,17 +14688,33 @@ var $author$project$Experience$employmentList = _List_fromArray(
 	},
 		{
 		company: 'NEOM',
-		description: _List_Nil,
+		description: _List_fromArray(
+			[
+				_List_fromArray(
+				['Developed and maintained a decentralized identity system based on the Substrate framework.']),
+				_List_fromArray(
+				['Added support for flexible Substrate runtime configurations for development, staging and production ', 'environments.']),
+				_List_fromArray(
+				['Researched try-runtime feature of Substrate, implemented it in the project and gave an internal ', 'presentation, summarizing its features and use cases to the dev team.'])
+			]),
 		end: $elm$core$Maybe$Nothing,
 		location: 'Remote',
 		role: 'Blockchain developer (Rust)',
 		skills: _List_fromArray(
-			['Rust', 'Substrate']),
+			['Rust', 'Substrate', 'DID']),
 		start: A3($justinmimbs$date$Date$fromCalendarDate, 2023, $elm$time$Time$Oct, 1)
 	},
 		{
 		company: 'TONOMUS-Milqia',
-		description: _List_Nil,
+		description: _List_fromArray(
+			[
+				_List_fromArray(
+				['Counducted research for a startup at an extremely early stage.']),
+				_List_fromArray(
+				['Led efforts to organize research data. Analyzed it, proposed new ideas shaping early versions of the ', 'product.']),
+				_List_fromArray(
+				['Designed early product prototypes in Figma to collect user feedback.'])
+			]),
 		end: $elm$core$Maybe$Nothing,
 		location: 'Remote',
 		role: 'Co-Founder',

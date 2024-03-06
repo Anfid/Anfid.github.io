@@ -123,8 +123,17 @@ employmentList =
       , start = Date.fromCalendarDate 2023 Oct 1
       , end = Nothing
       , location = "Remote"
-      , skills = [ "Rust", "Substrate" ]
-      , description = []
+      , skills = [ "Rust", "Substrate", "DID" ]
+      , description =
+            [ [ "Developed and maintained a decentralized identity system based on the Substrate framework."
+              ]
+            , [ "Added support for flexible Substrate runtime configurations for development, staging and production "
+              , "environments."
+              ]
+            , [ "Researched try-runtime feature of Substrate, implemented it in the project and gave an internal "
+              , "presentation, summarizing its features and use cases to the dev team."
+              ]
+            ]
       }
     , { role = "Co-Founder"
       , company = "TONOMUS-Milqia"
@@ -132,7 +141,15 @@ employmentList =
       , end = Nothing
       , location = "Remote"
       , skills = []
-      , description = []
+      , description =
+            [ [ "Counducted research for a startup at an extremely early stage."
+              ]
+            , [ "Led efforts to organize research data. Analyzed it, proposed new ideas shaping early versions of the "
+              , "product."
+              ]
+            , [ "Designed early product prototypes in Figma to collect user feedback."
+              ]
+            ]
       }
     ]
 
