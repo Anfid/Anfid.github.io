@@ -348,7 +348,29 @@ projects model =
         [ chapter "Rust"
             model.style
             1
-            [ chapter "dnd-stuff"
+            [ chapter "Mandelbrot"
+                model.style
+                2
+                [ Element.textColumn [ Element.spacing 15, Element.width fill ]
+                    [ Element.image
+                        [ Element.width <| px 200, Element.alignRight, Element.padding 5 ]
+                        { src = "https://raw.githubusercontent.com/Anfid/media/master/Minibrot.png", description = "Mandelbrot zoom-in screenshot" }
+                    , Element.row [ Element.spacing 20 ]
+                        [ liveDemoButton model.style "/projects/mandelbrot/index.html"
+                        , sourceButton model.style "https://github.com/Anfid/mandelbrot"
+                        ]
+                    , techStack model.style [ "Rust", "WASM", "WebGPU", "WGSL" ]
+                    , Element.paragraph (Styles.paragraph model.style [])
+                        [ text <|
+                            "Mandelbrot set visualization powered by WebGPU. Since technology is very young, browser "
+                                ++ "and driver support may be limited. For an up-to-date list of browsers that support "
+                                ++ "WebGPU, see "
+                        , link model.style "this MDN doc" "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API#browser_compatibility"
+                        , text "."
+                        ]
+                    ]
+                ]
+            , chapter "dnd-stuff"
                 model.style
                 2
                 [ Element.textColumn [ Element.spacing 15, Element.width fill ]
