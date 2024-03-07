@@ -14709,7 +14709,7 @@ var $author$project$Experience$employmentList = _List_fromArray(
 		description: _List_fromArray(
 			[
 				_List_fromArray(
-				['Counducted research for a startup at an extremely early stage.']),
+				['Conducted research for a startup at an extremely early stage.']),
 				_List_fromArray(
 				['Led efforts to organize research data. Analyzed it, proposed new ideas shaping early versions of the ', 'product.']),
 				_List_fromArray(

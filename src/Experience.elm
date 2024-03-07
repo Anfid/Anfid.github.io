@@ -142,7 +142,7 @@ employmentList =
       , location = "Remote"
       , skills = []
       , description =
-            [ [ "Counducted research for a startup at an extremely early stage."
+            [ [ "Conducted research for a startup at an extremely early stage."
               ]
             , [ "Led efforts to organize research data. Analyzed it, proposed new ideas shaping early versions of the "
               , "product."
