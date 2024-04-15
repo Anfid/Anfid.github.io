@@ -30,7 +30,7 @@ about =
       , "hardware. During software development my main priority is it's reliability and security. I put in extra "
       , "effort to make sure that it adheres to best practices and applicable open standards."
       ]
-    , [ "I have significant experience in organizing work on a project and prioritizing key features and tasks. I "
+    , [ "I have experience in coordinating teamwork on a project and prioritizing key features and tasks. I "
       , "proactively engage in discussions of what project or feature aims to achieve and what is required to "
       , "implement it. This allows me to identify potential difficult points early on, provide swift feedback and set "
       , "realistic goals or come up with a good compromise if resources are limited."
@@ -118,10 +118,10 @@ employmentList =
               ]
             ]
       }
-    , { role = "Blockchain developer (Rust)"
-      , company = "NEOM"
+    , { role = "Blockchain developer (Rust) and founding engineer"
+      , company = "TONOMUS, NEOM"
       , start = Date.fromCalendarDate 2023 Oct 1
-      , end = Nothing
+      , end = Just <| Date.fromCalendarDate 2024 Mar 7
       , location = "Remote"
       , skills = [ "Rust", "Substrate", "DID" ]
       , description =
@@ -133,16 +133,7 @@ employmentList =
             , [ "Researched try-runtime feature of Substrate, implemented it in the project and gave an internal "
               , "presentation, summarizing its features and use cases to the dev team."
               ]
-            ]
-      }
-    , { role = "Co-Founder"
-      , company = "TONOMUS-Milqia"
-      , start = Date.fromCalendarDate 2023 Nov 1
-      , end = Nothing
-      , location = "Remote"
-      , skills = []
-      , description =
-            [ [ "Conducted research for a startup at an extremely early stage."
+            , [ "Conducted research for a startup at an extremely early stage."
               ]
             , [ "Led efforts to organize research data. Analyzed it, proposed new ideas shaping early versions of the "
               , "product."

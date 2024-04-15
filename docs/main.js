@@ -12888,7 +12888,7 @@ var $author$project$Experience$about = _List_fromArray(
 		_List_fromArray(
 		['I\'m a Rust engineer experienced in Rust, WebAssembly, UNIX and blockchain. My C/C++ embedded background ', 'provided me with deep understanding of how software works on the lowest level and how it interacts with ', 'hardware. During software development my main priority is it\'s reliability and security. I put in extra ', 'effort to make sure that it adheres to best practices and applicable open standards.']),
 		_List_fromArray(
-		['I have significant experience in organizing work on a project and prioritizing key features and tasks. I ', 'proactively engage in discussions of what project or feature aims to achieve and what is required to ', 'implement it. This allows me to identify potential difficult points early on, provide swift feedback and set ', 'realistic goals or come up with a good compromise if resources are limited.']),
+		['I have experience in coordinating teamwork on a project and prioritizing key features and tasks. I ', 'proactively engage in discussions of what project or feature aims to achieve and what is required to ', 'implement it. This allows me to identify potential difficult points early on, provide swift feedback and set ', 'realistic goals or come up with a good compromise if resources are limited.']),
 		_List_fromArray(
 		['And of course I always remain open to learning from other people or from my own experiences. I feel like this ', 'is a must for being a good developer in a rapidly-changing software development world.'])
 	]);
@@ -12974,7 +12974,29 @@ var $author$project$Resume$bodyPart = F2(
 					content
 				]));
 	});
+var $mdgriffith$elm_ui$Element$el = F2(
+	function (attrs, child) {
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asEl,
+			$mdgriffith$elm_ui$Internal$Model$div,
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
+				A2(
+					$elm$core$List$cons,
+					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
+					attrs)),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(
+				_List_fromArray(
+					[child])));
+	});
+var $elm$time$Time$Aug = {$: 'Aug'};
+var $elm$time$Time$Dec = {$: 'Dec'};
+var $elm$time$Time$Jan = {$: 'Jan'};
+var $elm$time$Time$Mar = {$: 'Mar'};
 var $elm$time$Time$Oct = {$: 'Oct'};
+var $elm$time$Time$Sep = {$: 'Sep'};
 var $justinmimbs$date$Date$RD = function (a) {
 	return {$: 'RD', a: a};
 };
@@ -13063,14 +13085,116 @@ var $justinmimbs$date$Date$fromCalendarDate = F3(
 				A2($justinmimbs$date$Date$daysInMonth, y, m),
 				d));
 	});
-var $author$project$Experience$educationList = _List_fromArray(
+var $author$project$Experience$employmentList = _List_fromArray(
 	[
 		{
+		company: 'MERA',
+		description: _List_fromArray(
+			[
+				_List_fromArray(
+				['Developed and maintained fire alarm and security systems on embedded devices running Linux and TreadX RTOS.']),
+				_List_fromArray(
+				['Improved device network connection stability.']),
+				_List_fromArray(
+				['Migrated legacy firmware to a device running RTOS.']),
+				_List_fromArray(
+				['Researched networking standards and protocols to work on network switch firmware.'])
+			]),
 		end: $elm$core$Maybe$Just(
-			A3($justinmimbs$date$Date$fromCalendarDate, 2017, $elm$time$Time$Oct, 1)),
-		institution: 'Nizhniy Novgorod Technical College',
+			A3($justinmimbs$date$Date$fromCalendarDate, 2019, $elm$time$Time$Sep, 1)),
 		location: 'Nizhniy Novgorod, Russia',
-		start: A3($justinmimbs$date$Date$fromCalendarDate, 2013, $elm$time$Time$Oct, 1)
+		role: 'Embedded developer (C/C++)',
+		skills: _List_fromArray(
+			['C/C++', 'Embedded', 'Networking', 'Buildroot', 'RTOS']),
+		start: A3($justinmimbs$date$Date$fromCalendarDate, 2018, $elm$time$Time$Mar, 1)
+	},
+		{
+		company: 'XDSoft',
+		description: _List_fromArray(
+			[
+				_List_fromArray(
+				['Implemented the intellectual property tracking system on top of the Exonum blockchain node.']),
+				_List_fromArray(
+				['Updated consensus algorithm to improve node connectivity.']),
+				_List_fromArray(
+				['Had to take over leading the project development urgently, was able to adapt to new responsibilities quickly and made ', 'sure that good quality product was delivered in time.']),
+				_List_fromArray(
+				['Integrated cryptography library in accordance with certification requirements, provided necessary documentation for ', 'certification process.']),
+				_List_fromArray(
+				['Set up and optimized GitLab CI test and build process for Rust project.'])
+			]),
+		end: $elm$core$Maybe$Just(
+			A3($justinmimbs$date$Date$fromCalendarDate, 2021, $elm$time$Time$Mar, 1)),
+		location: 'Novosibirsk, Russia',
+		role: 'Blockchain developer (Rust)',
+		skills: _List_fromArray(
+			['Rust', 'Tokio', 'GitLab CI', 'Exonum']),
+		start: A3($justinmimbs$date$Date$fromCalendarDate, 2019, $elm$time$Time$Sep, 1)
+	},
+		{
+		company: 'Gear',
+		description: _List_fromArray(
+			[
+				_List_fromArray(
+				['Provided library interface for smart contract development with safe and user-friendly abstractions over low-level functions ', 'exposed by smart contract platform.']),
+				_List_fromArray(
+				['Greatly extended the functionality of smart contract test library and streamlined it\'s API.']),
+				_List_fromArray(
+				['Implemented unit tests for existing functionality.'])
+			]),
+		end: $elm$core$Maybe$Just(
+			A3($justinmimbs$date$Date$fromCalendarDate, 2021, $elm$time$Time$Dec, 1)),
+		location: 'Moscow, Russia',
+		role: 'Blockchain developer (Rust)',
+		skills: _List_fromArray(
+			['Rust', 'WebAssembly', 'Substrate', 'API design']),
+		start: A3($justinmimbs$date$Date$fromCalendarDate, 2021, $elm$time$Time$Aug, 1)
+	},
+		{
+		company: 'Bictory',
+		description: _List_fromArray(
+			[
+				_List_fromArray(
+				['Updated NFT project to adhere to Concordium blockchain interoperability standard CIS-1.']),
+				_List_fromArray(
+				['Took full responsibility for designing and implementing name service smart contract for Concordium ecosystem and ', 'provided a flexible solution within strict time schedule despite unclear and fluctuating requirements. During my work ', 'on the name service I was able to provide stable documentation of future API and binary serialization format extremely ', 'early to allow the start of integration process and reduce overall project development time.']),
+				_List_fromArray(
+				['All the work had to be done in a rapidly changing environment, some work-in-progress solutions had to be reworked ', 'swiftly due to blockchain updates.']),
+				_List_fromArray(
+				['Aggressively optimized WebAssembly binaries for size to provide extensive functionality despite strict blockchain limitations.'])
+			]),
+		end: $elm$core$Maybe$Just(
+			A3($justinmimbs$date$Date$fromCalendarDate, 2022, $elm$time$Time$Oct, 1)),
+		location: 'Remote',
+		role: 'Smart contract developer (Rust)',
+		skills: _List_fromArray(
+			['Rust', 'Smart Contracts', 'WebAssembly', 'Concordium', 'API design']),
+		start: A3($justinmimbs$date$Date$fromCalendarDate, 2022, $elm$time$Time$Jan, 1)
+	},
+		{
+		company: 'TONOMUS, NEOM',
+		description: _List_fromArray(
+			[
+				_List_fromArray(
+				['Developed and maintained a decentralized identity system based on the Substrate framework.']),
+				_List_fromArray(
+				['Added support for flexible Substrate runtime configurations for development, staging and production ', 'environments.']),
+				_List_fromArray(
+				['Researched try-runtime feature of Substrate, implemented it in the project and gave an internal ', 'presentation, summarizing its features and use cases to the dev team.']),
+				_List_fromArray(
+				['Conducted research for a startup at an extremely early stage.']),
+				_List_fromArray(
+				['Led efforts to organize research data. Analyzed it, proposed new ideas shaping early versions of the ', 'product.']),
+				_List_fromArray(
+				['Designed early product prototypes in Figma to collect user feedback.'])
+			]),
+		end: $elm$core$Maybe$Just(
+			A3($justinmimbs$date$Date$fromCalendarDate, 2024, $elm$time$Time$Mar, 7)),
+		location: 'Remote',
+		role: 'Blockchain developer (Rust) and founding engineer',
+		skills: _List_fromArray(
+			['Rust', 'Substrate', 'DID']),
+		start: A3($justinmimbs$date$Date$fromCalendarDate, 2023, $elm$time$Time$Oct, 1)
 	}
 	]);
 var $elm$core$Basics$composeR = F3(
@@ -13078,7 +13202,6 @@ var $elm$core$Basics$composeR = F3(
 		return g(
 			f(x));
 	});
-var $elm$time$Time$Jan = {$: 'Jan'};
 var $justinmimbs$date$Date$monthToNumber = function (m) {
 	switch (m.$) {
 		case 'Jan':
@@ -13108,15 +13231,11 @@ var $justinmimbs$date$Date$monthToNumber = function (m) {
 	}
 };
 var $elm$time$Time$Apr = {$: 'Apr'};
-var $elm$time$Time$Aug = {$: 'Aug'};
-var $elm$time$Time$Dec = {$: 'Dec'};
 var $elm$time$Time$Feb = {$: 'Feb'};
 var $elm$time$Time$Jul = {$: 'Jul'};
 var $elm$time$Time$Jun = {$: 'Jun'};
-var $elm$time$Time$Mar = {$: 'Mar'};
 var $elm$time$Time$May = {$: 'May'};
 var $elm$time$Time$Nov = {$: 'Nov'};
-var $elm$time$Time$Sep = {$: 'Sep'};
 var $justinmimbs$date$Date$numberToMonth = function (mn) {
 	var _v0 = A2($elm$core$Basics$max, 1, mn);
 	switch (_v0) {
@@ -14235,23 +14354,6 @@ var $author$project$Resume$formatDateRange = F2(
 			}
 		}());
 	});
-var $mdgriffith$elm_ui$Element$el = F2(
-	function (attrs, child) {
-		return A4(
-			$mdgriffith$elm_ui$Internal$Model$element,
-			$mdgriffith$elm_ui$Internal$Model$asEl,
-			$mdgriffith$elm_ui$Internal$Model$div,
-			A2(
-				$elm$core$List$cons,
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
-				A2(
-					$elm$core$List$cons,
-					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
-					attrs)),
-			$mdgriffith$elm_ui$Internal$Model$Unkeyed(
-				_List_fromArray(
-					[child])));
-	});
 var $author$project$Resume$fgFadedColor = A3($mdgriffith$elm_ui$Element$rgb255, 100, 100, 100);
 var $mdgriffith$elm_ui$Element$none = $mdgriffith$elm_ui$Internal$Model$Empty;
 var $mdgriffith$elm_ui$Internal$Model$paddingName = F4(
@@ -14591,137 +14693,6 @@ var $author$project$Resume$historyEntry = F5(
 					content
 				]));
 	});
-var $author$project$Resume$educationToHistory = function (entry) {
-	return A5(
-		$author$project$Resume$historyEntry,
-		entry.institution,
-		A2($author$project$Resume$formatDateRange, entry.start, entry.end),
-		entry.location,
-		_List_Nil,
-		$mdgriffith$elm_ui$Element$none);
-};
-var $author$project$Experience$employmentList = _List_fromArray(
-	[
-		{
-		company: 'MERA',
-		description: _List_fromArray(
-			[
-				_List_fromArray(
-				['Developed and maintained fire alarm and security systems on embedded devices running Linux and TreadX RTOS.']),
-				_List_fromArray(
-				['Improved device network connection stability.']),
-				_List_fromArray(
-				['Migrated legacy firmware to a device running RTOS.']),
-				_List_fromArray(
-				['Researched networking standards and protocols to work on network switch firmware.'])
-			]),
-		end: $elm$core$Maybe$Just(
-			A3($justinmimbs$date$Date$fromCalendarDate, 2019, $elm$time$Time$Sep, 1)),
-		location: 'Nizhniy Novgorod, Russia',
-		role: 'Embedded developer (C/C++)',
-		skills: _List_fromArray(
-			['C/C++', 'Embedded', 'Networking', 'Buildroot', 'RTOS']),
-		start: A3($justinmimbs$date$Date$fromCalendarDate, 2018, $elm$time$Time$Mar, 1)
-	},
-		{
-		company: 'XDSoft',
-		description: _List_fromArray(
-			[
-				_List_fromArray(
-				['Implemented the intellectual property tracking system on top of the Exonum blockchain node.']),
-				_List_fromArray(
-				['Updated consensus algorithm to improve node connectivity.']),
-				_List_fromArray(
-				['Had to take over leading the project development urgently, was able to adapt to new responsibilities quickly and made ', 'sure that good quality product was delivered in time.']),
-				_List_fromArray(
-				['Integrated cryptography library in accordance with certification requirements, provided necessary documentation for ', 'certification process.']),
-				_List_fromArray(
-				['Set up and optimized GitLab CI test and build process for Rust project.'])
-			]),
-		end: $elm$core$Maybe$Just(
-			A3($justinmimbs$date$Date$fromCalendarDate, 2021, $elm$time$Time$Mar, 1)),
-		location: 'Novosibirsk, Russia',
-		role: 'Blockchain developer (Rust)',
-		skills: _List_fromArray(
-			['Rust', 'Tokio', 'GitLab CI', 'Exonum']),
-		start: A3($justinmimbs$date$Date$fromCalendarDate, 2019, $elm$time$Time$Sep, 1)
-	},
-		{
-		company: 'Gear',
-		description: _List_fromArray(
-			[
-				_List_fromArray(
-				['Provided library interface for smart contract development with safe and user-friendly abstractions over low-level functions ', 'exposed by smart contract platform.']),
-				_List_fromArray(
-				['Greatly extended the functionality of smart contract test library and streamlined it\'s API.']),
-				_List_fromArray(
-				['Implemented unit tests for existing functionality.'])
-			]),
-		end: $elm$core$Maybe$Just(
-			A3($justinmimbs$date$Date$fromCalendarDate, 2021, $elm$time$Time$Dec, 1)),
-		location: 'Moscow, Russia',
-		role: 'Blockchain developer (Rust)',
-		skills: _List_fromArray(
-			['Rust', 'WebAssembly', 'Substrate', 'API design']),
-		start: A3($justinmimbs$date$Date$fromCalendarDate, 2021, $elm$time$Time$Aug, 1)
-	},
-		{
-		company: 'Bictory',
-		description: _List_fromArray(
-			[
-				_List_fromArray(
-				['Updated NFT project to adhere to Concordium blockchain interoperability standard CIS-1.']),
-				_List_fromArray(
-				['Took full responsibility for designing and implementing name service smart contract for Concordium ecosystem and ', 'provided a flexible solution within strict time schedule despite unclear and fluctuating requirements. During my work ', 'on the name service I was able to provide stable documentation of future API and binary serialization format extremely ', 'early to allow the start of integration process and reduce overall project development time.']),
-				_List_fromArray(
-				['All the work had to be done in a rapidly changing environment, some work-in-progress solutions had to be reworked ', 'swiftly due to blockchain updates.']),
-				_List_fromArray(
-				['Aggressively optimized WebAssembly binaries for size to provide extensive functionality despite strict blockchain limitations.'])
-			]),
-		end: $elm$core$Maybe$Just(
-			A3($justinmimbs$date$Date$fromCalendarDate, 2022, $elm$time$Time$Oct, 1)),
-		location: 'Remote',
-		role: 'Smart contract developer (Rust)',
-		skills: _List_fromArray(
-			['Rust', 'Smart Contracts', 'WebAssembly', 'Concordium', 'API design']),
-		start: A3($justinmimbs$date$Date$fromCalendarDate, 2022, $elm$time$Time$Jan, 1)
-	},
-		{
-		company: 'NEOM',
-		description: _List_fromArray(
-			[
-				_List_fromArray(
-				['Developed and maintained a decentralized identity system based on the Substrate framework.']),
-				_List_fromArray(
-				['Added support for flexible Substrate runtime configurations for development, staging and production ', 'environments.']),
-				_List_fromArray(
-				['Researched try-runtime feature of Substrate, implemented it in the project and gave an internal ', 'presentation, summarizing its features and use cases to the dev team.'])
-			]),
-		end: $elm$core$Maybe$Nothing,
-		location: 'Remote',
-		role: 'Blockchain developer (Rust)',
-		skills: _List_fromArray(
-			['Rust', 'Substrate', 'DID']),
-		start: A3($justinmimbs$date$Date$fromCalendarDate, 2023, $elm$time$Time$Oct, 1)
-	},
-		{
-		company: 'TONOMUS-Milqia',
-		description: _List_fromArray(
-			[
-				_List_fromArray(
-				['Conducted research for a startup at an extremely early stage.']),
-				_List_fromArray(
-				['Led efforts to organize research data. Analyzed it, proposed new ideas shaping early versions of the ', 'product.']),
-				_List_fromArray(
-				['Designed early product prototypes in Figma to collect user feedback.'])
-			]),
-		end: $elm$core$Maybe$Nothing,
-		location: 'Remote',
-		role: 'Co-Founder',
-		skills: _List_Nil,
-		start: A3($justinmimbs$date$Date$fromCalendarDate, 2023, $elm$time$Time$Nov, 1)
-	}
-	]);
 var $mdgriffith$elm_ui$Internal$Model$AsTextColumn = {$: 'AsTextColumn'};
 var $mdgriffith$elm_ui$Internal$Model$asTextColumn = $mdgriffith$elm_ui$Internal$Model$AsTextColumn;
 var $mdgriffith$elm_ui$Internal$Model$Max = F2(
@@ -15095,27 +15066,7 @@ var $author$project$Resume$body = A2(
 									function (e) {
 										return $justinmimbs$date$Date$toRataDie(e.start);
 									},
-									$author$project$Experience$employmentList))))),
-					A2(
-					$author$project$Resume$bodyPart,
-					'Education',
-					A2(
-						$mdgriffith$elm_ui$Element$column,
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-								$mdgriffith$elm_ui$Element$spacing(20)
-							]),
-						A2(
-							$elm$core$List$map,
-							$author$project$Resume$educationToHistory,
-							$elm$core$List$reverse(
-								A2(
-									$elm$core$List$sortBy,
-									function (e) {
-										return $justinmimbs$date$Date$toRataDie(e.start);
-									},
-									$author$project$Experience$educationList)))))
+									$author$project$Experience$employmentList)))))
 				])),
 			A2(
 			$mdgriffith$elm_ui$Element$column,

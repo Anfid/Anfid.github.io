@@ -7,7 +7,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import ElementFix exposing (text)
-import Experience exposing (EducationEntry, EmploymentEntry)
+import Experience exposing (EmploymentEntry)
 import Html.Attributes
 import Time exposing (Month(..))
 
@@ -74,11 +74,6 @@ body =
                     List.map employmentToHistory <|
                         List.reverse <|
                             List.sortBy (\e -> Date.toRataDie e.start) Experience.employmentList
-            , bodyPart "Education" <|
-                column [ Element.width fill, Element.spacing 20 ] <|
-                    List.map educationToHistory <|
-                        List.reverse <|
-                            List.sortBy (\e -> Date.toRataDie e.start) Experience.educationList
             ]
         , column [ Element.width <| px rcolWidth, Element.spacing 30, alignTop ]
             [ extraEntry "Skills" <|
@@ -197,16 +192,6 @@ employmentToHistory entry =
         entry.location
         entry.skills
         (textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ]) entry.description)
-
-
-educationToHistory : EducationEntry -> Element Msg
-educationToHistory entry =
-    historyEntry
-        entry.institution
-        (formatDateRange entry.start entry.end)
-        entry.location
-        []
-        Element.none
 
 
 formatDateRange : Date -> Maybe Date -> String
