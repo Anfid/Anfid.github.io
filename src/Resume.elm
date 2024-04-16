@@ -6,7 +6,7 @@ import Element exposing (Color, Element, alignTop, column, el, fill, paragraph, 
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
-import ElementFix exposing (text)
+import ElementExt exposing (text)
 import Experience exposing (EmploymentEntry)
 import Html.Attributes
 import Time exposing (Month(..))
