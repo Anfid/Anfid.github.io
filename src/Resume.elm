@@ -196,11 +196,11 @@ employmentToHistory entry =
 
 formatDateRange : Date -> Maybe Date -> String
 formatDateRange start maybeEnd =
-    Date.format "MMMM Y" start
+    Date.format "MMMM y" start
         ++ " - "
         ++ (case maybeEnd of
                 Just end ->
-                    Date.format "MMMM Y" end
+                    Date.format "MMMM y" end
 
                 Nothing ->
                     "Present"
