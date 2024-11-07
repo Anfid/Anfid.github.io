@@ -92,7 +92,7 @@ body =
                     , "Tokio"
                     , "x86 ASM"
                     , "Elm"
-                    , "Golang"
+                    , "Python"
                     , "Lua"
                     , "C"
                     ]
@@ -103,8 +103,8 @@ body =
                         [ Element.spacing 3 ]
                         [ el (extrasTextStyle [ Font.bold ]) <| text "E-mail"
                         , Element.link []
-                            { url = "mailto:mikhail.pogretskiy@gmail.com"
-                            , label = el (extrasTextStyle [ Element.alignRight ]) <| text "mikhail.pogretskiy@gmail.com"
+                            { url = "mailto:mikhail@anfid.net"
+                            , label = el (extrasTextStyle [ Element.alignRight ]) <| text "mikhail@anfid.net"
                             }
                         ]
                     , Element.column

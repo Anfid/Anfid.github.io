@@ -142,6 +142,26 @@ employmentList =
               ]
             ]
       }
+    , { role = "Backend developer (Rust)"
+      , company = "Balthazar Labs"
+      , start = Date.fromCalendarDate 2024 Jun 17
+      , end = Nothing
+      , location = "Remote"
+      , skills = [ "Rust", "Python", "sqlx" ]
+      , description =
+            [ [ "Developed and maintained a system to track the process and results of scientific experiments, "
+              , "including a backend service and a Python code runner."
+              ]
+            , [ "Implemented persistent state in the runner to preserve information across multiple code "
+              , "executions."
+              ]
+            , [ "Added tracking of relevant experiment information in the runner, such as script stdio, files, plots "
+              , "and graphs, errors, etc."
+              ]
+            , [ "Implemented cross-platform functionality to stop script run remotely, in a controlled manner."
+              ]
+            ]
+      }
     ]
 
 
