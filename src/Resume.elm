@@ -60,7 +60,7 @@ rcolWidth =
 
 textColumnFromStrings : List (Element.Attribute Msg) -> List (List String) -> Element Msg
 textColumnFromStrings attributes paragraphs =
-    textColumn attributes <| List.map (\p -> paragraph [] <| List.map text p) paragraphs
+    textColumn attributes <| List.map (\p -> paragraph [ Element.spacing 2 ] <| List.map text p) paragraphs
 
 
 body : Element Msg
@@ -68,7 +68,7 @@ body =
     row [ Element.spacing 20, Element.width <| Element.minimum (lcolMinWidth + rcolWidth + 20) <| Element.maximum (lcolMaxWidth + rcolWidth + 20) <| fill ]
         [ column [ Element.width <| Element.minimum lcolMinWidth <| Element.maximum lcolMaxWidth fill, Element.spacing 35, alignTop ]
             [ bodyPart "About me" <|
-                textColumnFromStrings (textStyle [ Element.width fill, Element.spacing 10 ]) Experience.about
+                textColumnFromStrings (textStyle [ Element.width fill, Element.spacing 5 ]) Experience.about
             , bodyPart "Employment history" <|
                 column [ Element.width fill, Element.spacing 20 ] <|
                     List.map employmentToHistory <|
@@ -191,7 +191,7 @@ employmentToHistory entry =
         (formatDateRange entry.start entry.end)
         entry.location
         entry.skills
-        (textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 7 ]) entry.description)
+        (textColumnFromStrings (textStyle [ Element.width fill, paddingLeft 10, Element.spacing 5 ]) entry.description)
 
 
 formatDateRange : Date -> Maybe Date -> String
@@ -251,7 +251,7 @@ textStyle : List (Element.Attribute msg) -> List (Element.Attribute msg)
 textStyle =
     (++)
         [ Font.color fgColor
-        , Font.size 16
+        , Font.size 14
         , Font.family [ Font.serif ]
         ]
 
